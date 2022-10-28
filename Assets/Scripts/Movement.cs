@@ -14,15 +14,17 @@ namespace Settings
         [SerializeField] private Vector2 angleRange;
         [SerializeField] private float xProgress;
         [SerializeField] private float cycleTime=1;
-        
+        [SerializeField] private Camera camera;
+        private bool inInteractiveArea;
+        private IInteractive interactiveElement;
+        private Vector2 mousePos;
 
         private void MakeProgress(int at, float delta)
         {
             if (at == state)
             {
-                this.transform.Translate(xProgress*delta,0,0);
+                this.transform.Translate(xProgress*delta * Mathf.Sign(mousePos.x- this.transform.position.x),0,0);
                 progress += delta* (1f/cycleTime);
-                Debug.Log(progress);
                 if (progress >= 1)
                 {
                     state = (state + 1) % states;
@@ -36,6 +38,21 @@ namespace Settings
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            IInteractive interactable = other.GetComponent<IInteractive>();
+            if (interactable == null || !interactable.Begin()) return;
+            this.interactiveElement = interactable;
+            Debug.Log("ssup");
+            this.interactiveElement.EndEvent += OnInteractiveElementExit;
+        }
+
+        private void OnInteractiveElementExit()
+        {
+            this.interactiveElement.EndEvent -= OnInteractiveElementExit;
+            this.interactiveElement = null;
+        }
+
         private void OnGUI()
         {
             GUIStyle style = new GUIStyle("label") {fontSize = 30};
@@ -44,10 +61,20 @@ namespace Settings
 
         private void Update()
         {
-            if(Input.GetMouseButton(0))
+            mousePos=camera.ScreenToWorldPoint(Input.mousePosition);
+            bool left = Input.GetMouseButton(0);
+            bool right = Input.GetMouseButton(1);
+            if (interactiveElement == null)
+            {
+                if(left)
                 MakeProgress(0,Time.deltaTime);
-            if(Input.GetMouseButton(1))
+                if(right)
                 MakeProgress(1,Time.deltaTime);
+            }
+            else
+            {
+                interactiveElement.InteractiveUpdate(left,right,mousePos);
+            }
         }
     }
 }
