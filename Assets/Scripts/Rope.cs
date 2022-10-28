@@ -45,7 +45,7 @@ public class Rope : MonoBehaviour
         {
             Vector2 dir = (EndB.position - EndA.position).normalized;
 
-            EndB.position = (dir * Length) + (Vector2)EndA.position;
+            EndB.position = dir * Length + (Vector2)EndA.position;
         }
         
         _lineRenderer.SetPositions(points); 
