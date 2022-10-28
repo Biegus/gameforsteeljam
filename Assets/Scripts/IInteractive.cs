@@ -8,5 +8,6 @@ namespace Game
         public event Action EndEvent;
         bool Begin();
         void InteractiveUpdate(bool left,bool right, Vector2 pos);
+        
     }
 }
