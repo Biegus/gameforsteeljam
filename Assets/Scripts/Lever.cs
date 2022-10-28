@@ -12,10 +12,13 @@ namespace Game
         [SerializeField] private float minLen=1;
         private bool active = false;
         [SerializeField] private UnityEvent onFinished;
+        private Hint hint;
         public bool Begin()
         {
+            hint=Hint.Spawn("swipe down in order to release the lever",new Vector2(0,3));
             return true;
         }
+        
 
         public void InteractiveUpdate(bool left, bool right, Vector2 pos)
         {
@@ -32,7 +35,9 @@ namespace Game
                 if (angle < 30 && dir.sqrMagnitude >= minLen)
                 {
                     EndEvent?.Invoke();
+                
                     onFinished?.Invoke();
+                    hint.FadeOut();
                 }
             }
         }
