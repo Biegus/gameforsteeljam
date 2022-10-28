@@ -74,7 +74,7 @@ namespace Settings
             }
             else
             {
-                interactiveElement.InteractiveUpdate(left,right,mousePos);
+                interactiveElement?.InteractiveUpdate(left,right,mousePos);
             }
         }
     }
