@@ -54,9 +54,9 @@ namespace Settings
         }
 
         private void OnGUI()
-        {
+        { 
             GUIStyle style = new GUIStyle("label") {fontSize = 30};
-           GUILayout.Label($"{progress}, {state}",style);
+            GUILayout.Label($"{progress}, {state}",style);
         }
 
         private void Update()
@@ -64,12 +64,12 @@ namespace Settings
             mousePos=camera.ScreenToWorldPoint(Input.mousePosition);
             bool left = Input.GetMouseButton(0);
             bool right = Input.GetMouseButton(1);
-            if (interactiveElement == null)
+            if (interactiveElement == null && !(left && right))
             {
                 if(left)
-                MakeProgress(0,Time.deltaTime);
+                    MakeProgress(0,Time.deltaTime);
                 if(right)
-                MakeProgress(1,Time.deltaTime);
+                    MakeProgress(1,Time.deltaTime);
             }
             else
             {
