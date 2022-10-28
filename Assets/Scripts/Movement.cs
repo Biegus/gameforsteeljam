@@ -18,6 +18,7 @@ namespace Settings
         private bool inInteractiveArea;
         private IInteractive interactiveElement;
         private Vector2 mousePos;
+        
 
         private void MakeProgress(int at, float delta)
         {
