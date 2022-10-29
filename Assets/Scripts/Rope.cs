@@ -24,7 +24,7 @@ public class Rope : MonoBehaviour
     private int Link;
 
     [SerializeField] private Transform floor;
-    [SerializeField] private Movement movement;
+    public bool IsMaxed { get; private set; }
     private float ApplySag(float x, float distance)
     {
         
@@ -53,10 +53,11 @@ public class Rope : MonoBehaviour
         {
             Vector2 dir = (EndB.position - EndA.position).normalized;
 
-            EndB.position = dir * Length + (Vector2)EndA.position;
-            movement.RopeOut();
-            
+            EndB.position = dir * Length + (Vector2) EndA.position;
+            IsMaxed = true;
+
         }
+        else IsMaxed = false;
         
         dist = Vector2.Distance(EndA.position, EndB.position);
         
