@@ -18,6 +18,14 @@ namespace Game
             Spawn();
         }
 
+        private string GetDescr(int index,string val)
+        {
+            if (index < 2)
+            {
+                return $"Hold {val}";
+            }
+            else return $"{val} leg";
+        }
         public void Spawn()
         {
            
@@ -26,9 +34,9 @@ namespace Game
                 last.FadeOut();
             }
             if (index % 2 == 0)
-               last= Hint.Spawn("Left", points[index% points.Length].position);
+               last= Hint.Spawn(GetDescr(index,"Left"), points[index% points.Length].position);
             else
-               last= Hint.Spawn("Right", points[index% points.Length].position);
+               last= Hint.Spawn(GetDescr(index,"Right"), points[index% points.Length].position);
             index++;
         }
 
