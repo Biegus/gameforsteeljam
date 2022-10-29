@@ -42,3 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Rail
+    uniqueID: 1526613397
+    locked: 0
+  - name: Particle
+    uniqueID: 1847452549
+    locked: 0
+  - name: Cart
+    uniqueID: 3404912653
+    locked: 0

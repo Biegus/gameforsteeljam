@@ -14,7 +14,7 @@ namespace Game
         private bool isDone = false;
         private bool used = false;
         [SerializeField] private Transform hintPoint;
-        public bool Begin()
+        public virtual bool Begin()
         {
             if (used) return false;
             hint=Hint.Spawn(hintText,hintPoint.position);
