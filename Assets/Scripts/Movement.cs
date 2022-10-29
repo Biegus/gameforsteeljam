@@ -1,5 +1,6 @@
 ﻿using System;
 using Animancer;
+using DG.Tweening;
 using Game;
 using Honey;
 using UnityEditor.Animations;
@@ -56,6 +57,7 @@ namespace Settings
          private Timer ropeOutTimer;
          private Timer autoSkipTimer;
          private bool autoSkip = false;
+         private bool canWakeUp = false;
 
          private AudioSource[] audio;
          private void Awake()
@@ -67,7 +69,12 @@ namespace Settings
         private void Start()
         {
             Animancer.Play(sleepClip);
-            menu=Hint.Spawn("Left to wake up", menuTextPoint.transform.position); 
+            DOVirtual.DelayedCall(4f, () =>
+            {
+                canWakeUp = true;
+                menu = Hint.Spawn("Left to wake up", menuTextPoint.transform.position);
+            });
+           
             moveResetTimer = new Timer(2f);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
@@ -207,7 +214,7 @@ namespace Settings
             Debug.Log(interactiveElement);
             if (sleep && !wakingUp)
             {
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0) &&canWakeUp)
                 {
                     wakingUp = true;
                     Debug.Log("hi");
