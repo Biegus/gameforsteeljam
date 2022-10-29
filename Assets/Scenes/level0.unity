@@ -770,7 +770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3630851046404388052, guid: 297186448070f3745bc68741ed2134de, type: 3}
       propertyPath: Speed
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3630851046404388052, guid: 297186448070f3745bc68741ed2134de, type: 3}
       propertyPath: m_Enabled
@@ -908,7 +908,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &656289868
@@ -1142,6 +1142,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 879371813
       objectReference: {fileID: 0}
+    - target: {fileID: 4657010095302842127, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b158c282d9b8bb44915587ee207856c, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
