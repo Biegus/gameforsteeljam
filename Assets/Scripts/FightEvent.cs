@@ -46,14 +46,15 @@ namespace Game
                 yield return null;
             }
             
-
-
             movement.enabled = true;
         }
 
         public event Action EndEvent;
+        private bool activated;
         public bool Begin()
         {
+            if (activated) return false;
+            activated = true;
             return true;
         }
 
