@@ -12,6 +12,7 @@ namespace Game
         public static Lazy<Hint> Prefab = new Lazy<Hint>(()=> Resources.Load<Hint>("prefabs/hint"));
         [FormerlySerializedAs("text")] [SerializeField] private TMP_Text textEnitity;
         private bool done = false;
+        private Tween effectTween;
         public static Hint Spawn(string text, Vector2 pos,float? despawnTime=null,Color? color=null,float? inTime=null)
         {
             var instance = Instantiate(Prefab.Value);
@@ -29,7 +30,7 @@ namespace Game
             this.textEnitity.color = new Color(this.textEnitity.color.r, this.textEnitity.color.g,
                 this.textEnitity.color.b, 0);
             this.textEnitity.DOFade(1, inTime)
-                .SetLink(this.gameObject);
+                .SetLink(this.gameObject).OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ));
             this.textEnitity.color = color;
         }
 
@@ -37,6 +38,7 @@ namespace Game
         {
             if (done) return;
             done = true;
+            effectTween?.Kill();
             this.textEnitity.DOFade(0, 0.6f).SetLink(this.gameObject)
                 .OnComplete(() => Destroy(this.gameObject));
         }

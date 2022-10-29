@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveDirection: {x: 0.3, y: 0}
-  Speed: 2
+  Speed: 1.3
   startAfter: 5
   particle: {fileID: 3630851046304288709}
 --- !u!60 &3630851046404388056

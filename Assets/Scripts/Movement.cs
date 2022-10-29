@@ -45,6 +45,7 @@ namespace Settings
          [FormerlySerializedAs("crate")] [SerializeField] private Transform cargo;
          [SerializeField] private AnimationClip fail;
          private bool isFalling = false;
+         private AnimancerState ropeState;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
@@ -54,23 +55,28 @@ namespace Settings
         {
             moveResetTimer = new Timer(2f);
             Animancer.Play(idle);
-            wrongCooldown = new Timer(0.5f);
+            wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
         }
 
-        private void Play(AnimationClip clip)
+        private AnimancerState Play(AnimationClip clip)
         {
             
-            Animancer.Play(clip);
+            var es=Animancer.Play(clip);
             currentClip = clip;
+            return es;
         }
 
-        private void SoftPlay(AnimationClip clip)
+        private AnimancerState SoftPlay(AnimationClip clip)
         {
             
             if (currentClip == clip)
-                return;
-            Play(clip);
+                return null;
+            if (currentClip==ropeOutClip &&ropeState != null && ropeState.Time > ropeOutClip.length - 0.1f)
+            {
+                return null;
+            } 
+            return Play(clip);
         }
 
 
@@ -103,8 +109,9 @@ namespace Settings
             if ((State + 1) % states == at && progress >= forgiveValue)
             {
                 State = at;
+                 ResetProgress(); 
                 LegChanged?.Invoke(State);
-                progress = 0;
+                return true;
             }
             if (at == State)
             {
@@ -177,9 +184,8 @@ namespace Settings
             {
             
                 Animancer.enabled = true;
-                if (rope.IsMaxed)
+                if (rope.IsMaxed && this.transform.position.x<cargo.position.x)
                 {
-                    Debug.Log("run");
                     SoftPlay(ropeOutClip);
                 }
                 else SoftPlay(idle);
@@ -207,10 +213,10 @@ namespace Settings
                         correct=correct&MakeProgress(1,Time.deltaTime); 
                 }
                
-                if (!correct && (progress>0 || forgiveAfterStoper.Done) && wrongCooldown.Push() && !rope.IsMaxed)
+                if (!correct && (progress>0 || forgiveAfterStoper.Done) &&  !rope.IsMaxed && wrongCooldown.Push()  )
                 {
                     
-                    Hint.Spawn("WRONG",mistakePos.transform.position,  1f,Color.red);
+                    //Hint.Spawn("WRONG",mistakePos.transform.position,  1f,Color.red);
                     Animancer.enabled = true;
                     progress = 0;
                     Animancer.Play(fail)
