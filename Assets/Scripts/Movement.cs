@@ -67,6 +67,7 @@ namespace Settings
 
         private void SoftPlay(AnimationClip clip)
         {
+            
             if (currentClip == clip)
                 return;
             Play(clip);
@@ -170,11 +171,17 @@ namespace Settings
         private void Update()
         {
             if (noHope) return;
+           
             if (isFalling && !rope.IsMaxed) return;
             if (Animancer.enabled || rope.IsMaxed)
             {
+            
                 Animancer.enabled = true;
-                if(rope.IsMaxed) SoftPlay(ropeOutClip);
+                if (rope.IsMaxed)
+                {
+                    Debug.Log("run");
+                    SoftPlay(ropeOutClip);
+                }
                 else SoftPlay(idle);
             }
             if (moveResetTimer.Push())
@@ -200,7 +207,7 @@ namespace Settings
                         correct=correct&MakeProgress(1,Time.deltaTime); 
                 }
                
-                if (!correct && (progress>0 || forgiveAfterStoper.Done) && wrongCooldown.Push())
+                if (!correct && (progress>0 || forgiveAfterStoper.Done) && wrongCooldown.Push() && !rope.IsMaxed)
                 {
                     
                     Hint.Spawn("WRONG",mistakePos.transform.position,  1f,Color.red);

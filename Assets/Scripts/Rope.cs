@@ -48,16 +48,15 @@ public class Rope : MonoBehaviour
         float dist = Vector2.Distance(EndA.position, EndB.position);
         
         //Vector3[] points = { EndA.position, EndB.position };
-
-        if (Vector2.Distance(EndA.position, EndB.position) > Length)
+        if (dist> Length)
         {
             Vector2 dir = (EndB.position - EndA.position).normalized;
 
             EndB.position = dir * Length + (Vector2) EndA.position;
-            IsMaxed = true;
 
         }
-        else IsMaxed = false;
+
+        IsMaxed = dist > Length - 0.1f;
         
         dist = Vector2.Distance(EndA.position, EndB.position);
         
