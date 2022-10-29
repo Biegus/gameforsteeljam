@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -30,7 +31,27 @@ namespace Game
             this.textEnitity.color = new Color(this.textEnitity.color.r, this.textEnitity.color.g,
                 this.textEnitity.color.b, 0);
             this.textEnitity.DOFade(1, inTime)
-                .SetLink(this.gameObject);//.OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ).SetLink(this.gameObject));
+                .SetLink(this.gameObject)
+                .OnComplete(() =>
+                {
+                  
+                    Vector2 basePos = this.transform.position;
+                    StartCoroutine(Cor());     
+                    IEnumerator Cor()
+                    {
+                        Vector2[] dirs = new Vector2[] {Vector2.left, Vector2.right, Vector2.up, Vector2.down};
+                        for (int i = 0;; i++)
+                        {
+                            Vector2 rand = dirs[UnityEngine.Random.Range(0, dirs.Length)];
+                            this.transform.position = basePos + rand * 0.05f;
+                            yield return new WaitForSeconds(0.1f - Mathf.Clamp(i/30f,0,1)*0.08f);
+                            this.transform.position = basePos;
+
+
+                        }
+                    }
+                })
+                ;//.OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ).SetLink(this.gameObject));
             this.textEnitity.color = color;
         }
 
