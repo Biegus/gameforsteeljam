@@ -113,6 +113,7 @@ namespace Settings
                 .Events.OnEnd += () =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Animancer.Stop();
             };
             noHope = true; 
         }
@@ -217,6 +218,7 @@ namespace Settings
                         if(enableOnStart!=null) 
                     enableOnStart.gameObject.SetActive(true);
                         sleep = false;
+                        Animancer.Stop();
                         return;
                     };
                     return;
@@ -286,6 +288,7 @@ namespace Settings
                     progress = 0;
                     Animancer.Play(fail)
                         .Events.OnEnd+= () => { isFalling = false;
+                        Animancer.Stop();
                     };
                     isFalling = true;
                 }

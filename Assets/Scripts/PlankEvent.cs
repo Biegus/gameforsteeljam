@@ -56,9 +56,11 @@ namespace Game
             this.GetComponent<SpriteRenderer>().enabled = false;
             hint.FadeOut();
             int counter = 0;
-                var swipeHint=Hint.Spawn("Swipe up 3 times",hintSpawnPlace.position,inTime:0.1f);
+            Hint swipeHint=null;
             while(counter<3)
             {
+                if (swipeHint == null)
+                    swipeHint = Hint.Spawn("Swipe up", hintSpawnPlace.position);
                 while (!Input.GetMouseButtonDown(0))
                 {
                     yield return null;
@@ -77,6 +79,8 @@ namespace Game
                 if (y >=0.8f)
                 {
                     counter++;
+                    swipeHint.FadeOut();
+                    swipeHint = null;
                     movement.Animancer.Play(whilePickupAnim);
                     yield return new WaitForSeconds(whilePickupAnim.length+0.2f);
                 }
@@ -85,7 +89,9 @@ namespace Game
 
 
             }
-            swipeHint.FadeOut();
+
+            if (swipeHint != null)
+                swipeHint.FadeOut();
 
             movement.Animancer.Play(finishPickupAnim);
             yield return new WaitForSeconds(finishPickupAnim.length);
