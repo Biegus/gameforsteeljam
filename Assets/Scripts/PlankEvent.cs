@@ -56,13 +56,13 @@ namespace Game
             this.GetComponent<SpriteRenderer>().enabled = false;
             hint.FadeOut();
             int counter = 0;
+                var swipeHint=Hint.Spawn("Swipe up 3 times",hintSpawnPlace.position,inTime:0.1f);
             while(counter<3)
             {
                 while (!Input.GetMouseButtonDown(0))
                 {
                     yield return null;
                 }
-                print("down");
 
                 Vector2 pos = cam.ScreenToWorldPoint( Input.mousePosition);
                 float y = 0; 
@@ -74,7 +74,6 @@ namespace Game
                     y = Mathf.Clamp(y, 0, 0.25f) * 4f - 0.1f;
                     yield return null;
                 }
-                print("up");
                 if (y >=0.8f)
                 {
                     counter++;
@@ -86,6 +85,7 @@ namespace Game
 
 
             }
+            swipeHint.FadeOut();
 
             movement.Animancer.Play(finishPickupAnim);
             yield return new WaitForSeconds(finishPickupAnim.length);
