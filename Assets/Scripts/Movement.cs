@@ -52,18 +52,17 @@ namespace Settings
          [SerializeField] private GameObject enableOnStart;
          private bool wakingUp;
          [SerializeField] private AnimationClip wakingUpClip;
+         [SerializeField] private Transform menuTextPoint;
          private void Awake()
         {
-            
             Animancer = this.GetComponent<AnimancerComponent>();
-          
-
+            
         }
 
         private void Start()
         {
             Animancer.Play(sleepClip);
-            menu=Hint.Spawn("Left to wake up", Vector2.zero); 
+            menu=Hint.Spawn("Left to wake up", menuTextPoint.transform.position); 
             moveResetTimer = new Timer(2f);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
