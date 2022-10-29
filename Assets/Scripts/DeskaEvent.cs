@@ -3,17 +3,18 @@ using System.Collections;
 using Animancer;
 using Settings;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
    
-    public class FightEvent 
+    public class DeskaEvent : MonoBehaviour
     {
-        [SerializeField] private AnimationClip animAtack;
-        [SerializeField] private AnimationClip enemyAnimAttack;
         [SerializeField] private Movement movement;
         [SerializeField] private Transform hintSpawnPlace;
-        [SerializeField] private AnimancerComponent enemy;
+        [SerializeField] private GameObject enemy;
+        [SerializeField] private AnimationClip pickupAnim;
+        
         private IEnumerator CQuickEventTap(bool a,Action onSuccess)
         {
             Hint hint= Hint.Spawn($"Tap {(a ? "left" : "right")}",hintSpawnPlace.transform.position,inTime:0.1f);
@@ -39,12 +40,16 @@ namespace Game
         private IEnumerator CRun()
         {
             movement.enabled = false;
+            
             bool success = false;
             Hint.Spawn("Left&Rigth", hintSpawnPlace.position, inTime: 0.1f);
             while (!Input.GetMouseButton(0) || !Input.GetMouseButton(1))
             {
                 yield return null;
             }
+
+            movement.Animancer.Play(pickupAnim);
+           
             
             movement.enabled = true;
         }
