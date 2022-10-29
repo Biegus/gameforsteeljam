@@ -204,7 +204,7 @@ MonoBehaviour:
   cycleTime: 0.3
   camera: {fileID: 0}
   idle: {fileID: 7400000, guid: 8883eb14330611a44962040714afe4fc, type: 2}
-  forgiveAfterTime: 2
+  forgiveAfterTime: 0.3
   walking:
   - {fileID: 7400000, guid: 900585a4b0b501d4eb407a7901c5a63c, type: 2}
   - {fileID: 7400000, guid: 6eed8c0c9170da64a97abf6c4561ed95, type: 2}
@@ -250,7 +250,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  forgiveValue: 0.9
+  forgiveValue: 0.8
   ropeOutClip: {fileID: 7400000, guid: 13db16d0517b55246b524e0b979ee5d4, type: 2}
   mistakeAnim: {fileID: 0}
   mistakePos: {fileID: 327741522}
