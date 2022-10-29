@@ -57,11 +57,11 @@ namespace Settings
          private Timer autoSkipTimer;
          private bool autoSkip = false;
 
-         private AudioSource audio;
+         private AudioSource[] audio;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
-            audio = GetComponent<AudioSource>();
+            audio = GetComponents<AudioSource>();
         }
 
         private void Start()
@@ -154,7 +154,8 @@ namespace Settings
                 progress = Mathf.Min(progress, 1); ;
 
                 walking[State].SampleAnimation(this.gameObject, progress * walking[State].length); 
-                audio.Play();
+                
+                audio[State].Play();
                 
                 if ( progress>= 1)
                 {
