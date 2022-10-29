@@ -42,7 +42,9 @@ namespace Settings
          [SerializeField] private Transform mistakePos;
          [SerializeField] private Rope rope;
          private AnimationClip currentClip = null;
-         [SerializeField] private Transform crate;
+         [FormerlySerializedAs("crate")] [SerializeField] private Transform cargo;
+         [SerializeField] private AnimationClip fail;
+         private bool isFalling = false;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
@@ -93,7 +95,7 @@ namespace Settings
         private bool MakeProgress(int at, float delta){
             
             float sign = Mathf.Sign(mousePos.x - this.transform.position.x);
-            if ( sign!= Mathf.Sign(crate.position.x-this.transform.position.x) && rope.IsMaxed)
+            if ( sign!= Mathf.Sign(cargo.position.x-this.transform.position.x) && rope.IsMaxed)
             {
                 return false;
             }
@@ -168,6 +170,7 @@ namespace Settings
         private void Update()
         {
             if (noHope) return;
+            if (isFalling && !rope.IsMaxed) return;
             if (Animancer.enabled || rope.IsMaxed)
             {
                 Animancer.enabled = true;
@@ -201,6 +204,13 @@ namespace Settings
                 {
                     
                     Hint.Spawn("WRONG",mistakePos.transform.position,  1f,Color.red);
+                    Animancer.enabled = true;
+                    progress = 0;
+                    Animancer.Play(fail)
+                        .Events.OnEnd= () => { isFalling = false;
+                        Animancer.Stop();
+                    };
+                    isFalling = true;
                 }
                 
             }
