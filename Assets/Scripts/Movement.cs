@@ -53,6 +53,7 @@ namespace Settings
          private bool wakingUp;
          [SerializeField] private AnimationClip wakingUpClip;
          [SerializeField] private Transform menuTextPoint;
+         private Timer ropeOutTimer;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
@@ -66,6 +67,8 @@ namespace Settings
             moveResetTimer = new Timer(2f);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
+            ropeOutTimer = new Timer(ropeOutClip.length);
+            ropeOutTimer.StartTime = -ropeOutClip.length;
         }
 
         private AnimancerState Play(AnimationClip clip)
@@ -210,12 +213,17 @@ namespace Settings
            
             if (isFalling && !rope.IsMaxed) return;
             if (sleep)return;
+            if (!ropeOutTimer.Done) return;
             if (Animancer.enabled || rope.IsMaxed)
             {
             
                 Animancer.enabled = true;
-                if (rope.IsMaxed && this.transform.position.x<cargo.position.x)
+                if (rope.IsMaxed )
                 {
+                    if (cargo.position.x < this.transform.position.x)
+                    {
+                        ropeOutTimer.Reset();
+                    }
                     SoftPlay(ropeOutClip);
                 }
                 else SoftPlay(idle);
