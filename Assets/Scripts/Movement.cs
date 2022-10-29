@@ -137,18 +137,13 @@ namespace Settings
                 moved = true;
                 if (progress > 0.5 )
                 {
-                    
                         autoSkip = true;
                         autoSkipTimer.Reset();
-                    
-                  
                 }
                 
                 
                 if (progress < 1)
                 {
-
-                  
                     this.transform.Translate(xProgress * sign * delta * speedPerStep.Evaluate(progress), 0,
                         0);
                     this.transform.localScale =
@@ -156,7 +151,6 @@ namespace Settings
                             this.transform.localScale.y,1 );
                 }
                 progress += delta* (1f/cycleTime);
-             
                 progress = Mathf.Min(progress, 1); ;
 
                 walking[State].SampleAnimation(this.gameObject, progress * walking[State].length); 

@@ -20,7 +20,8 @@ namespace Game
         private bool activated;
         [SerializeField] private AnimationClip whilePickupAnim;
         [SerializeField] private AnimationClip finishPickupAnim;
-
+        [SerializeField] private Camera cam;
+        [SerializeField] private GameObject activateAfter;
         private IEnumerator CQuickEventTap(bool a)
         {
             Hint hint= Hint.Spawn($"Tap {(a ? "left" : "right")}",hintSpawnPlace.transform.position,inTime:0.1f);
@@ -51,22 +52,48 @@ namespace Game
             }
             movement.Animancer.enabled = true;
             movement.Animancer.Play(idlePickupAnim);
+            activateAfter.gameObject.SetActive(true);
+            this.GetComponent<SpriteRenderer>().enabled = false;
             hint.FadeOut();
-            yield return CQuickEventTap(true);
-            movement.Animancer.Play(whilePickupAnim);
-            yield return new WaitForSeconds(whilePickupAnim.length);
-            movement.Animancer.Play(finishPickupAnim);
-            
-            plankO.gameObject.SetActive(false);
-            
-            DOVirtual.DelayedCall(idlePickupAnim.length, () =>
+            int counter = 0;
+            while(counter<3)
             {
+                while (!Input.GetMouseButtonDown(0))
+                {
+                    yield return null;
+                }
+                print("down");
 
-                movement.Animancer.enabled = false;
-                movement.enabled = true;
-                EndEvent();
-            }).SetLink(movement.gameObject);
+                Vector2 pos = cam.ScreenToWorldPoint( Input.mousePosition);
+                float y = 0; 
+                while (!Input.GetMouseButtonUp(0))
+                {
+                    Vector2 curPos = cam.ScreenToWorldPoint(Input.mousePosition);
+                    y = (curPos.y - pos.y);
+                    print(y);
+                    y = Mathf.Clamp(y, 0, 0.25f) * 4f - 0.1f;
+                    yield return null;
+                }
+                print("up");
+                if (y >=0.8f)
+                {
+                    counter++;
+                    movement.Animancer.Play(whilePickupAnim);
+                    yield return new WaitForSeconds(whilePickupAnim.length+0.2f);
+                }
 
+                movement.Animancer.Play(idlePickupAnim);
+
+
+            }
+
+            movement.Animancer.Play(finishPickupAnim);
+            yield return new WaitForSeconds(finishPickupAnim.length);
+            movement.Animancer.enabled = false;
+            plankO.gameObject.SetActive(false);
+            movement.enabled = true;
+            EndEvent();
+          
         }
        
         public bool Begin()
