@@ -919,6 +919,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1770249533}
     m_Modifications:
+    - target: {fileID: 4657010094801367424, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
+      propertyPath: Offset
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4657010094801367424, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
+      propertyPath: Amplitude
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4657010095302842124, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_Name
       value: Lantern (4)
@@ -2453,6 +2461,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1770249533}
     m_Modifications:
+    - target: {fileID: 4657010094801367424, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
+      propertyPath: Offset
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4657010094801367424, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
+      propertyPath: Amplitude
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4657010095302842124, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_Name
       value: Lantern (3)
@@ -2463,11 +2479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4657010095302842126, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2
+      value: 5.76
       objectReference: {fileID: 0}
     - target: {fileID: 4657010095302842126, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.43
+      value: -1.34
       objectReference: {fileID: 0}
     - target: {fileID: 4657010095302842126, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_LocalPosition.z

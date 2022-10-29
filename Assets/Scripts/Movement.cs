@@ -46,15 +46,25 @@ namespace Settings
          [SerializeField] private AnimationClip fail;
          private bool isFalling = false;
          private AnimancerState ropeState;
+         private bool sleep = true;
+         [FormerlySerializedAs("clip")] [SerializeField] private AnimationClip sleepClip;
+         private Hint menu;
+         [SerializeField] private GameObject enableOnStart;
+         private bool wakingUp;
+         [SerializeField] private AnimationClip wakingUpClip;
          private void Awake()
         {
+            
             Animancer = this.GetComponent<AnimancerComponent>();
+          
+
         }
 
         private void Start()
         {
+            Animancer.Play(sleepClip);
+            menu=Hint.Spawn("Left to wake up", Vector2.zero); 
             moveResetTimer = new Timer(2f);
-            Animancer.Play(idle);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
         }
@@ -144,6 +154,7 @@ namespace Settings
             }
             return false;
         }
+        
 
      
 
@@ -177,9 +188,29 @@ namespace Settings
         }
         private void Update()
         {
+            if (sleep && !wakingUp)
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    wakingUp = true;
+                    Debug.Log("hi");
+                    menu.FadeOut();
+                  
+                    Animancer.Play(wakingUpClip).Events.OnEnd+= () =>
+                    {
+                        if(enableOnStart!=null) 
+                    enableOnStart.gameObject.SetActive(true);
+                        sleep = false;
+                        return;
+                    };
+                    return;
+
+                }
+            }
             if (noHope) return;
            
             if (isFalling && !rope.IsMaxed) return;
+            if (sleep)return;
             if (Animancer.enabled || rope.IsMaxed)
             {
             
