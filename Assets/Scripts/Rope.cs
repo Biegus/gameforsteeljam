@@ -54,7 +54,7 @@ public class Rope : MonoBehaviour
             EndB.position = dir * Length + (Vector2)EndA.position;
         }
         //                              falling cart
-        if (dist > Length - 0.02f || EndA.position.y < EndB.position.y - 0.5f)
+        if (dist > Length || EndA.position.y < EndB.position.y - 0.5f)
         { 
             IsMaxed = true;
             Vector3[] points = { EndA.position, EndB.position };
