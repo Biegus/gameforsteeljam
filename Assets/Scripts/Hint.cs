@@ -20,7 +20,7 @@ namespace Game
             instance.Init(text,color?? Color.white,inTime??1);
             if (despawnTime != null)
             {
-                DOVirtual.DelayedCall(despawnTime.Value+1, () => instance.FadeOut());
+                DOVirtual.DelayedCall(despawnTime.Value + 1, () => instance.FadeOut()).SetLink(instance.gameObject);
             }
             return instance;
         }
@@ -30,7 +30,7 @@ namespace Game
             this.textEnitity.color = new Color(this.textEnitity.color.r, this.textEnitity.color.g,
                 this.textEnitity.color.b, 0);
             this.textEnitity.DOFade(1, inTime)
-                .SetLink(this.gameObject).OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ));
+                .SetLink(this.gameObject).OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ).SetLink(this.gameObject));
             this.textEnitity.color = color;
         }
 
