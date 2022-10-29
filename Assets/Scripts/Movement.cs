@@ -109,7 +109,7 @@ namespace Settings
                 if ( progress>= 1)
                 {
                     State = (State + 1) % states;
-                    progress = 0;
+                    ResetProgress();
                     LegChanged?.Invoke(State);
                 }
 
@@ -165,12 +165,18 @@ namespace Settings
             {
 
                 bool correct = true;
-                if(left)
-                     correct=MakeProgress(0,Time.deltaTime);
-                if(right)
-                    correct=correct&MakeProgress(1,Time.deltaTime);
+                if (left && right) correct = false;
+                else
+                {
+                    if(left)
+                        correct=MakeProgress(0,Time.deltaTime);
+                    if(right)
+                        correct=correct&MakeProgress(1,Time.deltaTime); 
+                }
+               
                 if (!correct && (progress>0 || forgiveAfterStoper.Done) && wrongCooldown.Push())
                 {
+                    
                     Hint.Spawn("WRONG", Vector2.zero, 1f,Color.red);
                 }
                 
