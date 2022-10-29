@@ -1,11 +1,11 @@
 ﻿using DG.Tweening;
-using UnityEditor;
+using UnityEngine;
 
 namespace Game
 {
     public class Init
     {
-        [InitializeOnLoadMethod]
+        [RuntimeInitializeOnLoadMethod]
         public static void Intialize()
         {
             DOTween.SetTweensCapacity(200,100);

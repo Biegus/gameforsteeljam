@@ -28,6 +28,7 @@ namespace Game
         private void Init(string text,Color color, float inTime)
         {
             this.textEnitity.text = text;
+            this.textEnitity.color = color;
             this.textEnitity.color = new Color(this.textEnitity.color.r, this.textEnitity.color.g,
                 this.textEnitity.color.b, 0);
             
@@ -53,7 +54,6 @@ namespace Game
                     }
                 })
                 ;//.OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ).SetLink(this.gameObject));
-            this.textEnitity.color = color;
         }
 
         public void FadeOut()

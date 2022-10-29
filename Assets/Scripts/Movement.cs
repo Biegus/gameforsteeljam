@@ -3,7 +3,6 @@ using Animancer;
 using DG.Tweening;
 using Game;
 using Honey;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -198,8 +197,8 @@ namespace Settings
 
         private void OnGUI()
         { 
-            GUIStyle style = new GUIStyle("label") {fontSize = 30};
-            GUILayout.Label($"{progress}, {State}",style);
+          //  GUIStyle style = new GUIStyle("label") {fontSize = 30};
+          //  GUILayout.Label($"{progress}, {State}",style);
         }
 
         private void ResetProgress()
