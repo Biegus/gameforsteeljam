@@ -34,7 +34,7 @@ namespace Settings
          public event Action<int> LegChanged;
          [SerializeField] private AnimationClip ropeOutClip;
 
-         private AnimancerComponent animancer;
+         public AnimancerComponent Animancer { get; private set; }
          private bool noHope = false;
          private Timer forgiveAfterStoper;
          [SerializeField] private AnimationClip mistakeAnim;
@@ -42,13 +42,13 @@ namespace Settings
 
          private void Awake()
         {
-            animancer = this.GetComponent<AnimancerComponent>();
+            Animancer = this.GetComponent<AnimancerComponent>();
         }
 
         private void Start()
         {
             moveResetTimer = new Timer(2f);
-            animancer.Play(idle);
+            Animancer.Play(idle);
             wrongCooldown = new Timer(0.5f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
         }
@@ -64,10 +64,14 @@ namespace Settings
             PlayDeathAnim(mistakeAnim);
         }
 
+        public void PlayDeathAnim()
+        {
+            PlayDeathAnim(ropeOutClip);
+        }
         public void PlayDeathAnim(AnimationClip clip)
         {
-            animancer.enabled = true;
-            animancer.Play(clip)
+            Animancer.enabled = true;
+            Animancer.Play(clip)
                 .Events.OnEnd = () =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -84,7 +88,7 @@ namespace Settings
             }
             if (at == State)
             {
-                animancer.enabled = false;
+                Animancer.enabled = false;
                 moved = true;
                 if (progress < 1)
                 {
@@ -150,8 +154,8 @@ namespace Settings
             if (moveResetTimer.Push())
             {
                 ResetProgress();
-                animancer.Play(idle);
-                animancer.enabled = true;
+                Animancer.Play(idle);
+                Animancer.enabled = true;
 
             }
             mousePos=camera.ScreenToWorldPoint(Input.mousePosition);

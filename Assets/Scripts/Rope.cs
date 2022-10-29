@@ -61,8 +61,7 @@ public class Rope : MonoBehaviour
         dist = Vector2.Distance(EndA.position, EndB.position);
         
         Vector3[] points = new Vector3[Link+1];
-        points[0] = EndA.position;
-        for (int i = 1; i < Link; i++)
+        for (int i = 0; i < Link; i++)
         {
             float x = dist* ((float)i / Link);
             float y = Mathf.Max(floor.transform.position.y- EndA.position.y, ApplySag(x,dist));
