@@ -1842,6 +1842,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7400000, guid: c352c888196aa6648b0466389dde0045, type: 2}
     - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
+      propertyPath: wakingUpClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 1716ed9a2acb40c44807accb2de70de0, type: 2}
+    - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
       propertyPath: enableOnStart
       value: 
       objectReference: {fileID: 1547700879}
@@ -1941,10 +1945,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.041666668
-    y: 0.097222224
-    width: 0.25
-    height: 0.25
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
