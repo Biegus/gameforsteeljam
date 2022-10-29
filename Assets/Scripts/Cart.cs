@@ -17,10 +17,13 @@ public class Cart : MonoBehaviour
     [SerializeField] public GameObject particle;
 
     private bool awake = false;
+    private AudioSource audio;
+    private bool once = true;
     
     private void Awake()
     {
         particle.gameObject.SetActive(false);
+        audio = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -28,6 +31,12 @@ public class Cart : MonoBehaviour
         awake |= Rope.IsMaxed;
         if (awake)
         {
+            if (once)
+            {
+                audio.Play();
+                once = false;
+            }
+            
             particle.gameObject.SetActive(true);
             transform.position += (Vector3)(MoveDirection * (Speed * Time.deltaTime));
         }

@@ -56,10 +56,12 @@ namespace Settings
          private Timer ropeOutTimer;
          private Timer autoSkipTimer;
          private bool autoSkip = false;
+
+         private AudioSource[] audio;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
-            
+            audio = GetComponents<AudioSource>();
         }
 
         private void Start()
@@ -108,9 +110,10 @@ namespace Settings
         {
             Animancer.enabled = true;
             Animancer.Play(clip)
-                .Events.OnEnd = () =>
+                .Events.OnEnd += () =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Animancer.Stop();
             };
             noHope = true; 
         }
@@ -135,18 +138,13 @@ namespace Settings
                 moved = true;
                 if (progress > 0.5 )
                 {
-                    
                         autoSkip = true;
                         autoSkipTimer.Reset();
-                    
-                  
                 }
                 
                 
                 if (progress < 1)
                 {
-
-                  
                     this.transform.Translate(xProgress * sign * delta * speedPerStep.Evaluate(progress), 0,
                         0);
                     this.transform.localScale =
@@ -154,11 +152,12 @@ namespace Settings
                             this.transform.localScale.y,1 );
                 }
                 progress += delta* (1f/cycleTime);
-             
                 progress = Mathf.Min(progress, 1); ;
 
                 walking[State].SampleAnimation(this.gameObject, progress * walking[State].length); 
-      
+                
+                audio[State].Play();
+                
                 if ( progress>= 1)
                 {
                     State = (State + 1) % states;
@@ -219,6 +218,7 @@ namespace Settings
                         if(enableOnStart!=null) 
                     enableOnStart.gameObject.SetActive(true);
                         sleep = false;
+                        Animancer.Stop();
                         return;
                     };
                     return;
@@ -287,7 +287,7 @@ namespace Settings
                     Animancer.enabled = true;
                     progress = 0;
                     Animancer.Play(fail)
-                        .Events.OnEnd= () => { isFalling = false;
+                        .Events.OnEnd+= () => { isFalling = false;
                         Animancer.Stop();
                     };
                     isFalling = true;
