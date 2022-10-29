@@ -10,20 +10,23 @@ public class Cart : MonoBehaviour
 
     [SerializeField] 
     private float Speed = 1;
+    
+    [SerializeField] 
+    private Rope Rope;
 
-    [SerializeField] private float startAfter = 2f;
-    private float startTime;
     [SerializeField] public GameObject particle;
+
+    private bool awake = false;
+    
     private void Awake()
     {
-        startTime = Time.time;
-        
         particle.gameObject.SetActive(false);
     }
-
+    
     void Update()
     {
-        if (Time.time - startTime > startAfter)
+        awake |= Rope.IsMaxed;
+        if (awake)
         {
             particle.gameObject.SetActive(true);
             transform.position += (Vector3)(MoveDirection * (Speed * Time.deltaTime));
