@@ -469,37 +469,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &327741521
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 327741522}
-  m_Layer: 7
-  m_Name: mistake
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &327741522
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327741521}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07097244, y: 4.01872, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 960297504}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &459648939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -814,14 +783,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1970269039, guid: 297186448070f3745bc68741ed2134de, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970269039, guid: 297186448070f3745bc68741ed2134de, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 1.54
-      objectReference: {fileID: 0}
     - target: {fileID: 3630851046404388051, guid: 297186448070f3745bc68741ed2134de, type: 3}
       propertyPath: m_Name
       value: cart
@@ -1080,14 +1041,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2746359179523454435, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.04741907
-      objectReference: {fileID: 0}
-    - target: {fileID: 2746359179523454435, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3259387
-      objectReference: {fileID: 0}
     - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
       propertyPath: rope
       value: 
@@ -1097,20 +1050,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1888392855}
     - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
-      propertyPath: crate
-      value: 
-      objectReference: {fileID: 1888392855}
-    - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 890481475}
     - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
-      propertyPath: mistakePos
-      value: 
-      objectReference: {fileID: 327741522}
+      propertyPath: forgiveValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7480616742665202002, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
       propertyPath: forgiveAfterTime
-      value: 2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7480616742665202005, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
       propertyPath: m_RootOrder
@@ -1160,15 +1109,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 7480616742665202007, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7480616742665202005, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 327741522}
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ad6304d10c39a345a1439b21b1d7c89, type: 3}
 --- !u!1 &890481474
 GameObject:

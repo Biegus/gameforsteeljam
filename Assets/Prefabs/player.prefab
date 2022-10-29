@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &327741521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327741522}
+  m_Layer: 7
+  m_Name: mistake
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327741522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327741521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07097244, y: 4.01872, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7480616742665202005}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654072374
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962646870115731025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11726019, y: 0.46359944, z: 0}
+  m_LocalPosition: {x: -0.04741907, y: 0.3259387, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,6 +129,7 @@ Transform:
   m_Children:
   - {fileID: 2746359179523454435}
   - {fileID: 1654072375}
+  - {fileID: 327741522}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -172,7 +204,7 @@ MonoBehaviour:
   cycleTime: 0.3
   camera: {fileID: 0}
   idle: {fileID: 7400000, guid: 8883eb14330611a44962040714afe4fc, type: 2}
-  forgiveAfterTime: 0.2
+  forgiveAfterTime: 2
   walking:
   - {fileID: 7400000, guid: 900585a4b0b501d4eb407a7901c5a63c, type: 2}
   - {fileID: 7400000, guid: 6eed8c0c9170da64a97abf6c4561ed95, type: 2}
@@ -218,10 +250,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  forgiveValue: 0.1
+  forgiveValue: 0.9
   ropeOutClip: {fileID: 7400000, guid: 13db16d0517b55246b524e0b979ee5d4, type: 2}
   mistakeAnim: {fileID: 0}
-  mistakePos: {fileID: 1654072375}
+  mistakePos: {fileID: 327741522}
   rope: {fileID: 0}
   cargo: {fileID: 0}
   fail: {fileID: 7400000, guid: 5ed76c6f7a2f456459e30ded595f3f71, type: 2}

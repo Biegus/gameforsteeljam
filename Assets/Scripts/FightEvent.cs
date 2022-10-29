@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Game
 {
    
-    public class FightEvent
+    public class FightEvent 
     {
         [SerializeField] private AnimationClip animAtack;
         [SerializeField] private AnimationClip enemyAnimAttack;
@@ -40,18 +40,25 @@ namespace Game
         {
             movement.enabled = false;
             bool success = false;
-            yield return CQuickEventTap(false, () => success = true);
-            if (!success)
+            Hint.Spawn("Left&Rigth", hintSpawnPlace.position, inTime: 0.1f);
+            while (!Input.GetMouseButton(0) || !Input.GetMouseButton(1))
             {
-                enemy.Play(enemyAnimAttack);
-                yield return new WaitForSeconds(enemyAnimAttack.length);
-                movement.enabled = true;
-                movement.PlayDeathAnim();
-                yield break;
+                yield return null;
             }
+            
 
 
             movement.enabled = true;
+        }
+
+        public event Action EndEvent;
+        public bool Begin()
+        {
+            return true;
+        }
+
+        public void InteractiveUpdate(bool left, bool right, Vector2 pos)
+        {
         }
     }
 }
