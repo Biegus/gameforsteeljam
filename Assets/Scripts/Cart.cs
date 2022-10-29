@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Cart : MonoBehaviour
@@ -17,13 +18,13 @@ public class Cart : MonoBehaviour
     [SerializeField] public GameObject particle;
 
     private bool awake = false;
-    private AudioSource audio;
+    private AudioSource[] audio;
     private bool once = true;
     
     private void Awake()
     {
         particle.gameObject.SetActive(false);
-        audio = GetComponent<AudioSource>();
+        audio = GetComponents<AudioSource>();
     }
     
     void Update()
@@ -33,7 +34,12 @@ public class Cart : MonoBehaviour
         {
             if (once)
             {
-                audio.Play();
+                audio[0].Play();
+                DOVirtual.DelayedCall(0.5f, () =>
+                {
+                    audio[1].Play();
+                    audio[1].DOFade(0.05f, 2f);
+                });
                 once = false;
             }
             
