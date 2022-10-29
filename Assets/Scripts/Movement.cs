@@ -162,7 +162,6 @@ namespace Settings
             IInteractive interactable = other.GetComponent<IInteractive>();
             if (interactable == null || !interactable.Begin()) return;
             this.interactiveElement = interactable;
-            Debug.Log("ssup");
             this.interactiveElement.EndEvent += OnInteractiveElementExit;
         }
 
