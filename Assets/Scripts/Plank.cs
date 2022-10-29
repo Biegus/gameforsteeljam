@@ -1,16 +1,14 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Game
 {
     public class Plank : MonoBehaviour
     {
-        private Rigidbody2D rigi;
-
-        private void Awake()
-        {
-            rigi = this.GetComponent<Rigidbody2D>();
-        }
+      
+        [SerializeField] private Collider2D toActivate;
+       
 
         public void Start()
         {
@@ -18,8 +16,9 @@ namespace Game
 
         public void Let()
         {
-            rigi.gravityScale = 1;
-            rigi.AddTorque(100);
+            toActivate.gameObject.SetActive(true);
+            this.transform.DORotate(new Vector3(0, 0, 90), 1);
+            
         }
     }
 }

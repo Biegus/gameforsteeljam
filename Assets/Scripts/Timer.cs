@@ -6,7 +6,7 @@ namespace Game
     {
         public float StartTime;
         private float TimeToElapse;
-        public Timer(int time)
+        public Timer(float time)
         {
             StartTime = Time.time;
             TimeToElapse = time;

@@ -12,10 +12,14 @@ namespace Game
         private Hint hint;
         [SerializeField] private string hintText;
         private bool isDone = false;
+        private bool used = false;
+        [SerializeField] private Transform hintPoint;
         public bool Begin()
         {
-            hint=Hint.Spawn(hintText,new Vector2(0,3));
-            return !isDone;
+            if (used) return false;
+            hint=Hint.Spawn(hintText,hintPoint.position);
+            used = true;
+            return true;
         }
 
         protected void Finish()

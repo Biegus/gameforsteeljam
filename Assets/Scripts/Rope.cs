@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Settings;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class Rope : MonoBehaviour
 {
 
+    [SerializeField] private Transform visualB;
     [SerializeField] 
     private Transform EndA;
     
@@ -15,11 +17,14 @@ public class Rope : MonoBehaviour
     
     [SerializeField] 
     private float Length;
+
+    [SerializeField] private Sprite lineSprite;
     
     [FormerlySerializedAs("Points")] [SerializeField] 
     private int Link;
 
     [SerializeField] private Transform floor;
+    [SerializeField] private Movement movement;
     private float ApplySag(float x, float distance)
     {
         
@@ -49,6 +54,8 @@ public class Rope : MonoBehaviour
             Vector2 dir = (EndB.position - EndA.position).normalized;
 
             EndB.position = dir * Length + (Vector2)EndA.position;
+            movement.RopeOut();
+            
         }
         
         dist = Vector2.Distance(EndA.position, EndB.position);
@@ -58,11 +65,11 @@ public class Rope : MonoBehaviour
         for (int i = 1; i < Link; i++)
         {
             float x = dist* ((float)i / Link);
-            float y = Mathf.Max(floor.transform.position.y, ApplySag(x,dist));
-            points[i] = new Vector2(-x*Mathf.Sign(this.EndA.position.x-this.EndB.position.x), y) + (Vector2)EndA.position;
+            float y = Mathf.Max(floor.transform.position.y- EndA.position.y, ApplySag(x,dist));
+            points[i] = new Vector2(-x*Mathf.Sign(this.EndA.position.x-this.visualB.position.x), y) + (Vector2)EndA.position;
         }
 
-        points[Link] = EndB.position;
+        points[Link] = visualB.position;
 
         _lineRenderer.SetPositions(points); 
     }

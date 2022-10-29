@@ -10,24 +10,43 @@ namespace Game
         [SerializeField] private Vector2 desiredDirection=Vector2.down;
         [SerializeField] private float minLen=1;
         private bool active = false;
+        [SerializeField] private Collider2D toEnable;
+        [SerializeField] private AnimationClip clip;
         
         public override void InteractiveUpdate(bool left, bool right, Vector2 pos)
         {
-                if (left && !active)
+             
+            if (left)
             {
-                active = true;
-                start = pos;
+                if (!active)
+                {
+                    active = true;
+                    start = pos;
+                }
+
+                float x = start.y - pos.y;
+                
+                float progress = Mathf.Clamp(x / minLen, 0, 1);
+                clip.SampleAnimation(this.gameObject,progress * clip.length);
+                
             }
-            else if (!left && active)
+            else if (active)
             {
-                Vector2 dir = (pos - start);
-                float angle = Vector2.Angle(dir, desiredDirection);
-                active = false;
-                if (angle < 30 && dir.sqrMagnitude >= minLen)
+                if (start.y - pos.y >= minLen-0.1)
                 {
                     Finish();
+                    
                 }
+                else
+                {
+                    active = false;
+                     clip.SampleAnimation(this.gameObject,0);       
+                }
+             
+                    
             }
+            
+                
         }
 
      

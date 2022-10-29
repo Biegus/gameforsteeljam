@@ -11,26 +11,34 @@ namespace Game
     {
         public static Lazy<Hint> Prefab = new Lazy<Hint>(()=> Resources.Load<Hint>("prefabs/hint"));
         [FormerlySerializedAs("text")] [SerializeField] private TMP_Text textEnitity;
-
-        public static Hint Spawn(string text, Vector2 pos)
+        private bool done = false;
+        public static Hint Spawn(string text, Vector2 pos,float? despawnTime=null,Color? color=null)
         {
             var instance = Instantiate(Prefab.Value);
             instance.transform.position = pos;
-            instance.Init(text);
+            instance.Init(text,color?? Color.white);
+            if (despawnTime != null)
+            {
+                DOVirtual.DelayedCall(despawnTime.Value, () => instance.FadeOut());
+            }
             return instance;
         }
-        private void Init(string text)
+        private void Init(string text,Color color)
         {
             this.textEnitity.text = text;
             this.textEnitity.color = new Color(this.textEnitity.color.r, this.textEnitity.color.g,
                 this.textEnitity.color.b, 0);
             this.textEnitity.DOFade(1, 1)
                 .SetLink(this.gameObject);
+            this.textEnitity.color = color;
         }
 
         public void FadeOut()
         {
-            this.textEnitity.DOFade(0, 1);
+            if (done) return;
+            done = true;
+            this.textEnitity.DOFade(0, 0.6f).SetLink(this.gameObject)
+                .OnComplete(() => Destroy(this.gameObject));
         }
         
 
