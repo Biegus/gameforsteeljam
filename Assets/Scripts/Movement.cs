@@ -39,7 +39,10 @@ namespace Settings
          private Timer forgiveAfterStoper;
          [SerializeField] private AnimationClip mistakeAnim;
          private Timer wrongCooldown;
-
+         [SerializeField] private Transform mistakePos;
+         [SerializeField] private Rope rope;
+         private AnimationClip currentClip = null;
+         [SerializeField] private Transform crate;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
@@ -53,11 +56,20 @@ namespace Settings
             forgiveAfterStoper = new Timer(forgiveAfterTime);
         }
 
-        public void RopeOut()
+        private void Play(AnimationClip clip)
         {
-      
-         PlayDeathAnim(ropeOutClip);
+            
+            Animancer.Play(clip);
+            currentClip = clip;
         }
+
+        private void SoftPlay(AnimationClip clip)
+        {
+            if (currentClip == clip)
+                return;
+            Play(clip);
+        }
+
 
         public void OnMistake()
         {
@@ -78,8 +90,13 @@ namespace Settings
             };
             noHope = true; 
         }
-        private bool MakeProgress(int at, float delta)
-        {
+        private bool MakeProgress(int at, float delta){
+            
+            float sign = Mathf.Sign(mousePos.x - this.transform.position.x);
+            if ( sign!= Mathf.Sign(crate.position.x-this.transform.position.x) && rope.IsMaxed)
+            {
+                return false;
+            }
             if ((State + 1) % states == at && progress >= forgiveValue)
             {
                 State = at;
@@ -93,7 +110,7 @@ namespace Settings
                 if (progress < 1)
                 {
 
-                    float sign = Mathf.Sign(mousePos.x - this.transform.position.x);
+                  
                     this.transform.Translate(xProgress * sign * delta * speedPerStep.Evaluate(progress), 0,
                         0);
                     this.transform.localScale =
@@ -151,10 +168,16 @@ namespace Settings
         private void Update()
         {
             if (noHope) return;
+            if (Animancer.enabled || rope.IsMaxed)
+            {
+                Animancer.enabled = true;
+                if(rope.IsMaxed) SoftPlay(ropeOutClip);
+                else SoftPlay(idle);
+            }
             if (moveResetTimer.Push())
             {
                 ResetProgress();
-                Animancer.Play(idle);
+                Play(idle);
                 Animancer.enabled = true;
 
             }
@@ -177,7 +200,7 @@ namespace Settings
                 if (!correct && (progress>0 || forgiveAfterStoper.Done) && wrongCooldown.Push())
                 {
                     
-                    Hint.Spawn("WRONG", Vector2.zero, 1f,Color.red);
+                    Hint.Spawn("WRONG",mistakePos.transform.position,  1f,Color.red);
                 }
                 
             }
