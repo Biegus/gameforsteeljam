@@ -110,7 +110,7 @@ namespace Settings
         {
             Animancer.enabled = true;
             Animancer.Play(clip)
-                .Events.OnEnd = () =>
+                .Events.OnEnd += () =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             };
@@ -284,8 +284,7 @@ namespace Settings
                     Animancer.enabled = true;
                     progress = 0;
                     Animancer.Play(fail)
-                        .Events.OnEnd= () => { isFalling = false;
-                        Animancer.Stop();
+                        .Events.OnEnd+= () => { isFalling = false;
                     };
                     isFalling = true;
                 }
