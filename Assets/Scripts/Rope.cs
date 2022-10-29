@@ -27,7 +27,6 @@ public class Rope : MonoBehaviour
     public bool IsMaxed { get; private set; }
     private float ApplySag(float x, float distance)
     {
-        
         float l = Length;
         float u = Mathf.Min(Length-0.001f,distance) ;
         x =  Mathf.Max(0,Mathf.Min(x, distance - 0.01f));
@@ -46,30 +45,38 @@ public class Rope : MonoBehaviour
     void Update()
     {
         float dist = Vector2.Distance(EndA.position, EndB.position);
-        
-        //Vector3[] points = { EndA.position, EndB.position };
-        if (dist> Length)
+
+        if (dist > Length)
         {
             Vector2 dir = (EndB.position - EndA.position).normalized;
 
-            EndB.position = dir * Length + (Vector2) EndA.position;
-
+            EndB.position = dir * Length + (Vector2)EndA.position;
         }
-
-        IsMaxed = dist > Length - 0.1f;
         
-        dist = Vector2.Distance(EndA.position, EndB.position);
-        
-        Vector3[] points = new Vector3[Link+1];
-        for (int i = 0; i < Link; i++)
+        if (dist > Length - 0.02f)
         {
-            float x = dist* ((float)i / Link);
-            float y = Mathf.Max(floor.transform.position.y- EndA.position.y, ApplySag(x,dist));
-            points[i] = new Vector2(-x*Mathf.Sign(this.EndA.position.x-this.visualB.position.x), y) + (Vector2)EndA.position;
+            IsMaxed = true;
+            Vector3[] points = { EndA.position, EndB.position };
+            _lineRenderer.positionCount = 2;
+            _lineRenderer.SetPositions(points);
         }
+        else
+        {
+            IsMaxed = false;
+            dist = Vector2.Distance(EndA.position, EndB.position);
+            
+            Vector3[] points = new Vector3[Link+1];
+            for (int i = 0; i < Link; i++)
+            {
+                float x = dist* ((float)i / Link);
+                float y = Mathf.Max(floor.transform.position.y- EndA.position.y, ApplySag(x,dist));
+                points[i] = new Vector2(-x*Mathf.Sign(this.EndA.position.x-this.visualB.position.x), y) + (Vector2)EndA.position;
+            }
 
-        points[Link] = visualB.position;
+            points[Link] = visualB.position;
 
-        _lineRenderer.SetPositions(points); 
+            _lineRenderer.positionCount = Link+1;
+            _lineRenderer.SetPositions(points); 
+        }
     }
 }
