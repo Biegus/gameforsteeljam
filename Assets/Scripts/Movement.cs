@@ -56,10 +56,12 @@ namespace Settings
          private Timer ropeOutTimer;
          private Timer autoSkipTimer;
          private bool autoSkip = false;
+
+         private AudioSource audio;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
-            
+            audio = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -158,7 +160,8 @@ namespace Settings
                 progress = Mathf.Min(progress, 1); ;
 
                 walking[State].SampleAnimation(this.gameObject, progress * walking[State].length); 
-      
+                audio.Play();
+                
                 if ( progress>= 1)
                 {
                     State = (State + 1) % states;

@@ -8,16 +8,28 @@ namespace Game
     {
       
         [SerializeField] private Collider2D toActivate;
-       
+
+        [SerializeField] private AudioClip[] clips; 
+        
+        private AudioSource audio;
 
         public void Start()
         {
+            audio = GetComponent<AudioSource>();
         }
 
         public void Let()
         {
+            audio.clip = clips[0];
+            audio.Play();
+            
             toActivate.gameObject.SetActive(true);
-            this.transform.DORotate(new Vector3(0, 0, 90), 1);
+            this.transform.DORotate(new Vector3(0, 0, 90), 1)
+                .OnComplete(() =>
+                {
+                    audio.clip = clips[1];
+                    audio.Play();
+                });
             
         }
     }
