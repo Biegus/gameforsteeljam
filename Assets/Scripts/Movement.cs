@@ -187,6 +187,7 @@ namespace Settings
         }
         private void Update()
         {
+            Debug.Log(interactiveElement);
             if (sleep && !wakingUp)
             {
                 if (Input.GetMouseButtonUp(0))
