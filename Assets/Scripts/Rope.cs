@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Settings;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -52,9 +53,9 @@ public class Rope : MonoBehaviour
 
             EndB.position = dir * Length + (Vector2)EndA.position;
         }
-        
-        if (dist > Length - 0.02f)
-        {
+        //                              falling cart
+        if (dist > Length - 0.02f || EndA.position.y < EndB.position.y - 0.5f)
+        { 
             IsMaxed = true;
             Vector3[] points = { EndA.position, EndB.position };
             _lineRenderer.positionCount = 2;
