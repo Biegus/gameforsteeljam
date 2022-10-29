@@ -23,7 +23,8 @@ public class KillTrigger : MonoBehaviour
     {
         if (TriggeringTags.Contains(col.tag))
         {
-            SpriteRenderer sprite = fadeSprite.GetComponent<SpriteRenderer>();
+            
+            SpriteRenderer sprite = GameObject.FindWithTag("GameOver").GetComponent<SpriteRenderer>();
             sprite.DOFade(1, fadeDuration)
                 .SetLink(sprite.gameObject)
                 .OnComplete(() =>
