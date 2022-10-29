@@ -1794,10 +1794,6 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4657010095302842126, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9616
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657010095302842126, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.999
       objectReference: {fileID: 0}
@@ -1836,18 +1832,6 @@ PrefabInstance:
     - target: {fileID: 4657010095302842126, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657010095302842127, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657010095302842127, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657010095302842127, guid: f91ea8f7e3753ef4faaec0eccee9b623, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1076472485
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
