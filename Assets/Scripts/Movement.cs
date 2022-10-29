@@ -72,7 +72,7 @@ namespace Settings
             DOVirtual.DelayedCall(4f, () =>
             {
                 canWakeUp = true;
-                menu = Hint.Spawn("Left to wake up", menuTextPoint.transform.position);
+                menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position);
             });
            
             moveResetTimer = new Timer(2f);
@@ -211,13 +211,11 @@ namespace Settings
         private void Update()
         {
            
-            Debug.Log(interactiveElement);
             if (sleep && !wakingUp)
             {
                 if (Input.GetMouseButtonUp(0) &&canWakeUp)
                 {
                     wakingUp = true;
-                    Debug.Log("hi");
                     menu.FadeOut();
                   
                     Animancer.Play(wakingUpClip).Events.OnEnd+= () =>

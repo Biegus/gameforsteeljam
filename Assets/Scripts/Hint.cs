@@ -30,6 +30,7 @@ namespace Game
             this.textEnitity.text = text;
             this.textEnitity.color = new Color(this.textEnitity.color.r, this.textEnitity.color.g,
                 this.textEnitity.color.b, 0);
+            
             this.textEnitity.DOFade(1, inTime)
                 .SetLink(this.gameObject)
                 .OnComplete(() =>
