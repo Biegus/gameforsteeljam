@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 namespace Game
 {
    
-    public class DeskaEvent : MonoBehaviour
+    public class PlankEvent : MonoBehaviour
     {
         [SerializeField] private Movement movement;
         [SerializeField] private Transform hintSpawnPlace;
