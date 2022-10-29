@@ -54,6 +54,8 @@ namespace Settings
          [SerializeField] private AnimationClip wakingUpClip;
          [SerializeField] private Transform menuTextPoint;
          private Timer ropeOutTimer;
+         private Timer autoSkipTimer;
+         private bool autoSkip = false;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
@@ -69,6 +71,7 @@ namespace Settings
             forgiveAfterStoper = new Timer(forgiveAfterTime);
             ropeOutTimer = new Timer(ropeOutClip.length);
             ropeOutTimer.StartTime = -ropeOutClip.length;
+            autoSkipTimer = new Timer(0.12f);
         }
 
         private AnimancerState Play(AnimationClip clip)
@@ -113,6 +116,7 @@ namespace Settings
         }
         private bool MakeProgress(int at, float delta){
             
+            
             float sign = Mathf.Sign(mousePos.x - this.transform.position.x);
             if ( sign!= Mathf.Sign(cargo.position.x-this.transform.position.x) && rope.IsMaxed)
             {
@@ -129,6 +133,16 @@ namespace Settings
             {
                 Animancer.enabled = false;
                 moved = true;
+                if (progress > 0.5 )
+                {
+                    
+                        autoSkip = true;
+                        autoSkipTimer.Reset();
+                    
+                  
+                }
+                
+                
                 if (progress < 1)
                 {
 
@@ -185,10 +199,12 @@ namespace Settings
         private void ResetProgress()
         {
             forgiveAfterStoper.Reset();
+            autoSkip = false;
             progress = 0;
         }
         private void Update()
         {
+           
             Debug.Log(interactiveElement);
             if (sleep && !wakingUp)
             {
@@ -214,6 +230,19 @@ namespace Settings
             if (isFalling && !rope.IsMaxed) return;
             if (sleep)return;
             if (!ropeOutTimer.Done) return;
+            if (autoSkip)
+            {
+                if(autoSkipTimer.Done)
+                {
+                    State = (State + 1) % states;
+                    LegChanged?.Invoke(State);
+                   ResetProgress(); 
+                    autoSkip = false;
+                }
+                
+               
+            }
+
             if (Animancer.enabled || rope.IsMaxed)
             {
             
