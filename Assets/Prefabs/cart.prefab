@@ -211,7 +211,7 @@ Transform:
   - {fileID: 1970269038}
   - {fileID: 1365333261}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3630851046404388053
 SpriteRenderer:
@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveDirection: {x: 0.3, y: 0}
-  Speed: 1
-  startAfter: 5
+  Speed: 1.3
+  Rope: {fileID: 0}
   particle: {fileID: 3630851046304288709}
 --- !u!60 &3630851046404388056
 PolygonCollider2D:

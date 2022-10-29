@@ -15,30 +15,28 @@ namespace Game
         [SerializeField] private Movement movement;
         [SerializeField] private Transform hintSpawnPlace;
         [FormerlySerializedAs("enemy")] [SerializeField] private GameObject plankO;
-        [SerializeField] private AnimationClip pickupAnim;
+        [FormerlySerializedAs("pickupAnim")] [SerializeField] private AnimationClip idlePickupAnim;
         public event Action EndEvent;
         private bool activated;
-        private IEnumerator CQuickEventTap(bool a,Action onSuccess)
+        [SerializeField] private AnimationClip whilePickupAnim;
+        [SerializeField] private AnimationClip finishPickupAnim;
+
+        private IEnumerator CQuickEventTap(bool a)
         {
             Hint hint= Hint.Spawn($"Tap {(a ? "left" : "right")}",hintSpawnPlace.transform.position,inTime:0.1f);
             int val = a ? 0 : 1;
             int count = 0;
             float start = Time.time;
-            while (Time.time - start < 0.1f)
+            while (count < 4) 
             {
                 if (Input.GetMouseButtonDown(val))
                 {
                     count++;
                 }
-
                 yield return null;
             }
+            hint.FadeOut();
 
-            if (count > 4)
-            {
-                onSuccess();
-            }
-            
         }
         private IEnumerator CRun()
         {
@@ -51,25 +49,25 @@ namespace Game
             {
                 yield return null;
             }
-
-            
-            hint.FadeOut();
-            plankO.gameObject.SetActive(false);
             movement.Animancer.enabled = true;
-            movement.Animancer.Play(pickupAnim);
-
-            DOVirtual.DelayedCall(pickupAnim.length, () =>
+            movement.Animancer.Play(idlePickupAnim);
+            hint.FadeOut();
+            yield return CQuickEventTap(true);
+            movement.Animancer.Play(whilePickupAnim);
+            yield return new WaitForSeconds(whilePickupAnim.length);
+            movement.Animancer.Play(finishPickupAnim);
+            
+            plankO.gameObject.SetActive(false);
+            
+            DOVirtual.DelayedCall(idlePickupAnim.length, () =>
             {
 
                 movement.Animancer.enabled = false;
                 movement.enabled = true;
                 EndEvent();
             }).SetLink(movement.gameObject);
-            
-
 
         }
-
        
         public bool Begin()
         {
