@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: lamp
+    uniqueID: 1693838587
+    locked: 0
   - name: Rail
     uniqueID: 1526613397
     locked: 0
@@ -54,14 +57,14 @@ TagManager:
   - name: CartParticle
     uniqueID: 1847452549
     locked: 0
+  - name: rope
+    uniqueID: 3996845533
+    locked: 0
   - name: Player
     uniqueID: 879371813
     locked: 0
   - name: Front
     uniqueID: 1566159935
-    locked: 0
-  - name: rope
-    uniqueID: 3996845533
     locked: 0
   - name: UI
     uniqueID: 2940956075
