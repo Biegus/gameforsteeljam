@@ -231,6 +231,7 @@ namespace Settings
             if (interactiveElement != null)
             {
                 interactiveElement?.InteractiveUpdate(Input.GetMouseButton(0),Input.GetMouseButton(1),mousePos);
+                return;
             };
             if (sleep && !wakingUp)
             {
