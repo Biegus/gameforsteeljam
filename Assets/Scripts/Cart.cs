@@ -20,11 +20,16 @@ public class Cart : MonoBehaviour
     private bool awake = false;
     private AudioSource[] audio;
     private bool once = true;
-    
+    public Vector2 Gravity=Vector2.down;
+   public Rigidbody2D Rigidbody { get;private set; }
+   private float gravLenght;
     private void Awake()
     {
         particle.gameObject.SetActive(false);
         audio = GetComponents<AudioSource>();
+        Rigidbody = this.GetComponent<Rigidbody2D>();
+        Rigidbody.gravityScale = 0;
+        gravLenght = Physics2D.gravity.magnitude;
     }
     
     void Update()
@@ -46,5 +51,10 @@ public class Cart : MonoBehaviour
             particle.gameObject.SetActive(true);
             transform.position += (Vector3)(MoveDirection * (Speed * Time.deltaTime));
         }
+    }
+
+    private void FixedUpdate()
+    {
+        this.Rigidbody.velocity += Gravity * gravLenght* Time.fixedDeltaTime ;
     }
 }
