@@ -57,5 +57,15 @@ namespace Game
         {
            Spawn(); 
         }
+
+        public void SpawnIfZero()
+        {
+            if(last==null) Spawn();
+        }
+        public void  Despawn()
+        {
+            if (last != null)
+                last.FadeOut(0.2f);
+        }
     }
 }

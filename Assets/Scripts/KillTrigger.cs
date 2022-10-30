@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Game;
+using Settings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,7 @@ public class KillTrigger : MonoBehaviour
     [SerializeField] 
     private AudioClip sound;
 
+
     private bool Lock;
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -36,7 +38,12 @@ public class KillTrigger : MonoBehaviour
                 audio.Play();
             }
             SpriteRenderer sprite = GameObject.FindWithTag("GameOver").GetComponent<SpriteRenderer>();
-            GameManager.Instance.Die(fadeDuration);
+          
+                GameManager.Instance.Die(fadeDuration);
+
+            
+
+        
         }
         
     }

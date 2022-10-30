@@ -277,6 +277,7 @@ MonoBehaviour:
   fadeSprite: {fileID: 0}
   fadeDuration: 0.1
   sound: {fileID: 8300000, guid: a18d2326f3997bc4ab83a0c0f47f259a, type: 3}
+  soft: 1
 --- !u!114 &3059181552853208605
 MonoBehaviour:
   m_ObjectHideFlags: 0
