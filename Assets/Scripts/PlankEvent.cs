@@ -97,6 +97,7 @@ namespace Game
             movement.Animancer.enabled = false;
             this.gameObject.SetActive(false);
            // movement.enabled = true;
+           movement.HasPlank = true;
             EndEvent();
           
         }

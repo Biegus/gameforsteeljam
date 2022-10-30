@@ -59,10 +59,11 @@ namespace Settings
          private bool autoSkip = false;
          private bool canWakeUp = false;
          [SerializeField] private TMP_Text toFadeAtStart;
-         public bool HasPlank { get; private set; } = true;
+         public bool HasPlank { get; set; } = true;
          public event Action OnInteraction;
          public event Action onInteractionEnd;
-         
+         public Rope Rope => rope;
+         public Transform Cart => cargo;
 
          private AudioSource[] audio;
          private void Awake()
@@ -80,7 +81,7 @@ namespace Settings
                 canWakeUp = true;
                 menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position,disableEffect:true);
             });
-           
+            sleep = false; 
             moveResetTimer = new Timer(2f);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);

@@ -25,6 +25,7 @@ namespace Game
         {
             AnimancerComponent = this.GetComponent<AnimancerComponent>();
             Rigi = this.GetComponent<Rigidbody2D>();
+            
         }
 
         public void Run()
@@ -48,7 +49,7 @@ namespace Game
                StartCoroutine(CAttackByEnemy(0,null));
                return true;
            }
-           StartCoroutine(CRun());
+           cor=StartCoroutine(CRun());
            this.Rigi.velocity = Vector2.zero;//TODO maybe don't just u know from 100 mph to 0 in one frame
            return true;
         }
@@ -74,6 +75,8 @@ namespace Game
                
         }
 
+        private Coroutine cor;
+
         Hint Spawn(string text)
         {
             return Hint.Spawn(text, HintPoint.position);
@@ -81,7 +84,7 @@ namespace Game
         private IEnumerator CRun()
         {
             AnimancerComponent.Stop();
-            movement.enabled = false;
+         //   movement.enabled = false;
             movement.Animancer.enabled=true;
             if (!movement.HasPlank)
             {
@@ -155,7 +158,7 @@ namespace Game
             }
 
             yield return this.AnimancerComponent.Play(enemyDie);
-            movement.enabled = true;
+         //   movement.enabled = true;
             Finish();
 
 
@@ -164,7 +167,13 @@ namespace Game
 
         public override void InteractiveUpdate(bool left, bool right, Vector2 pos)
         {
-            ;
+            print(movement.Rope.IsMaxed);
+            if (movement.Rope.IsMaxed && movement.transform.position.x < movement.Cart.transform.position.x)
+            {
+                GameManager.Instance.Die();
+                if(cor!=null) StopCoroutine(cor);
+                
+            }
         }
     }
 }
