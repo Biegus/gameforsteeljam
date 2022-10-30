@@ -69,6 +69,8 @@ namespace Settings
      [SerializeField] private LegTutorial tut;
 
          private AudioSource[] audio;
+         [SerializeField]
+         private TMP_Text fadeAfter;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
@@ -85,7 +87,7 @@ namespace Settings
              Animancer.Play(sleepClip);
              sleep = true;
              wakingUp = false;
-             DOVirtual.DelayedCall(1f, () =>
+             DOVirtual.DelayedCall(3f, () =>
              {
                  canWakeUp = true;
                  menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position,disableEffect:true);
@@ -265,6 +267,9 @@ namespace Settings
                 if (Input.GetMouseButtonUp(0) &&canWakeUp)
                 {
                     startSource.DOFade(0, 5f).SetEase(Ease.InOutQuad).SetLink(this.gameObject);
+                    if (fadeAfter != null)
+                        fadeAfter.DOFade(0, 1f).SetLink(this.gameObject)
+                            .OnComplete(() => Destroy(fadeAfter.gameObject));
                     wakingUp = true;
                     menu.FadeOut();
                     
