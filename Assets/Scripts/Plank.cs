@@ -11,6 +11,8 @@ namespace Game
 
         [SerializeField] private AudioClip[] clips; 
         
+        [SerializeField] private AnimationCurve curve; 
+        
         private AudioSource audio;
 
         public void Start()
@@ -25,6 +27,7 @@ namespace Game
             
             toActivate.gameObject.SetActive(true);
             this.transform.DORotate(new Vector3(0, 0, 90), 1)
+                .SetEase(curve)
                 .OnComplete(() =>
                 {
                     audio.clip = clips[1];
