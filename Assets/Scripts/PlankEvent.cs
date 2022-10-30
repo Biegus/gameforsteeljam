@@ -22,6 +22,7 @@ namespace Game
         [SerializeField] private AnimationClip finishPickupAnim;
         [SerializeField] private Camera cam;
         [SerializeField] private GameObject activateAfter;
+        private Hint hint;
         private IEnumerator CQuickEventTap(bool a)
         {
             Hint hint= Hint.Spawn($"Tap {(a ? "left" : "right")}",hintSpawnPlace.transform.position,inTime:0.1f);
@@ -42,10 +43,10 @@ namespace Game
         private IEnumerator CRun()
         {
             
-            movement.enabled = false;
+            //movement.enabled = false;
             
             bool success = false;
-            var hint=Hint.Spawn("Left&Rigth", hintSpawnPlace.position, inTime: 0.1f);
+             hint=Hint.Spawn("Left&Rigth", hintSpawnPlace.position, inTime: 0.1f);
             while (!Input.GetMouseButton(0) || !Input.GetMouseButton(1))
             {
                 yield return null;
@@ -97,12 +98,12 @@ namespace Game
             yield return new WaitForSeconds(finishPickupAnim.length);
             movement.Animancer.enabled = false;
             plankO.gameObject.SetActive(false);
-            movement.enabled = true;
+           // movement.enabled = true;
             EndEvent();
           
         }
        
-        public bool Begin()
+        public bool Begin(bool already)
         {
             if (activated) return false;
             activated = true;
@@ -112,6 +113,12 @@ namespace Game
 
         public void InteractiveUpdate(bool left, bool right, Vector2 pos)
         {
+        }
+
+        public void Abort()
+        {
+            if(hint!=null)
+                hint.FadeOut(0.1f);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Game;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,15 +36,7 @@ public class KillTrigger : MonoBehaviour
                 audio.Play();
             }
             SpriteRenderer sprite = GameObject.FindWithTag("GameOver").GetComponent<SpriteRenderer>();
-            sprite.DOFade(1, fadeDuration)
-                .SetLink(sprite.gameObject)
-                .OnComplete(() =>
-                {
-                    DOVirtual.DelayedCall(1f, () =>
-                    {
-                        SceneManager.LoadScene(SceneName);
-                    }).SetLink(this.gameObject);
-                });
+            GameManager.Instance.Die(fadeDuration);
         }
         
     }

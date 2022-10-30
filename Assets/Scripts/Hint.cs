@@ -56,12 +56,12 @@ namespace Game
                 ;//.OnComplete(() => effectTween= this.textEnitity.transform.DOScale(Vector3.one * 3f,15 ).SetLink(this.gameObject));
         }
 
-        public void FadeOut()
+        public void FadeOut(float? time=null)
         {
             if (done) return;
             done = true;
             effectTween?.Kill();
-            this.textEnitity.DOFade(0, 0.6f).SetLink(this.gameObject)
+            this.textEnitity.DOFade(0, time??0.6f).SetLink(this.gameObject)
                 .OnComplete(() => Destroy(this.gameObject));
         }
         
