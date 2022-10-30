@@ -102,7 +102,9 @@ namespace Game
             movement.Animancer.enabled=true;
             if (!movement.HasPlank)
             {
+                Debug.Log("No planka haha");
                 yield return CAttackByEnemy(0,null);
+                yield break;
             }
 
             
