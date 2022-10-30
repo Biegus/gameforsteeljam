@@ -57,6 +57,7 @@ namespace Settings
          private Timer autoSkipTimer;
          private bool autoSkip = false;
          private bool canWakeUp = false;
+         public bool HasPlank { get; private set; } = true;
 
          private AudioSource[] audio;
          private void Awake()
@@ -80,6 +81,7 @@ namespace Settings
             ropeOutTimer = new Timer(ropeOutClip.length);
             ropeOutTimer.StartTime = -ropeOutClip.length;
             autoSkipTimer = new Timer(0.12f);
+            
         }
 
         private AnimancerState Play(AnimationClip clip)
@@ -182,12 +184,26 @@ namespace Settings
         private void OnTriggerEnter2D(Collider2D other)
         {
             IInteractive interactable = other.GetComponent<IInteractive>();
-            if (interactable == null || !interactable.Begin()) return;
+            if (interactable == null || !interactable.Begin(this.interactiveElement!=null)) return;
+            if (this.interactiveElement != null)
+            {
+                interactiveElement.EndEvent -= OnInteractiveElementExit;
+                interactiveElement.Abort();
+            }
             this.interactiveElement = interactable;
             this.interactiveElement.EndEvent += OnInteractiveElementExit;
+            this.transform.localScale =
+                new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, 1);
         }
 
-    
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (interactiveElement!=null&&other.GetComponent<IInteractive>() == interactiveElement)
+            {
+                interactiveElement.Abort();
+                interactiveElement = null;
+            }
+        }
 
         private void OnInteractiveElementExit()
         {
@@ -209,7 +225,8 @@ namespace Settings
         }
         private void Update()
         {
-           
+
+            if (interactiveElement!=null) return;
             if (sleep && !wakingUp)
             {
                 if (Input.GetMouseButtonUp(0) &&canWakeUp)

@@ -2,6 +2,7 @@
 using Game;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -11,14 +12,15 @@ namespace Game
         [SerializeField] private UnityEvent onFinished;
         private Hint hint;
         [SerializeField] private string hintText;
-        private bool isDone = false;
-        private bool used = false;
+ public bool Used { get; private set; }= false;
         [SerializeField] private Transform hintPoint;
-        public virtual bool Begin()
+
+        public Transform HintPoint => hintPoint;
+        public virtual bool Begin(bool already)
         {
-            if (used) return false;
+            if (Used) return false;
             hint=Hint.Spawn(hintText,hintPoint.position);
-            used = true;
+            Used = true;
             return true;
         }
 
@@ -28,11 +30,12 @@ namespace Game
                 
             onFinished?.Invoke();
             hint.FadeOut();
-            isDone = true;
         }
 
         public abstract void InteractiveUpdate(bool left, bool right, Vector2 pos);
-
-
+        public void Abort()
+        {
+            
+        }
     }
 }
