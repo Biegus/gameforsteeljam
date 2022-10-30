@@ -98,7 +98,7 @@ namespace Game
             this.gameObject.SetActive(false);
            // movement.enabled = true;
            movement.HasPlank = true;
-            EndEvent();
+            EndEvent?.Invoke();
           
         }
        
