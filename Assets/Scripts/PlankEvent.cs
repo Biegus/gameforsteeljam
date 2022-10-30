@@ -22,6 +22,7 @@ namespace Game
         [SerializeField] private AnimationClip finishPickupAnim;
         [SerializeField] private Camera cam;
         private Hint hint;
+        private Coroutine _coroutine;
         private IEnumerator CQuickEventTap(bool a)
         {
             Hint hint= Hint.Spawn($"Tap {(a ? "left" : "right")}",hintSpawnPlace.transform.position,inTime:0.1f);
@@ -55,11 +56,11 @@ namespace Game
             plankO.GetComponent<SpriteRenderer>().enabled = false;
             hint.FadeOut();
             int counter = 0;
-            Hint swipeHint=null;
+             hint=null;
             while(counter<3)
             {
-                if (swipeHint == null)
-                    swipeHint = Hint.Spawn("Swipe up", hintSpawnPlace.position);
+                if (hint == null)
+                    hint = Hint.Spawn("Swipe up", hintSpawnPlace.position);
                 while (!Input.GetMouseButtonDown(0))
                 {
                     yield return null;
@@ -78,8 +79,8 @@ namespace Game
                 if (y >=0.8f)
                 {
                     counter++;
-                    swipeHint.FadeOut();
-                    swipeHint = null;
+                   hint .FadeOut();
+                    hint = null;
                     movement.Animancer.Play(whilePickupAnim);
                     yield return new WaitForSeconds(whilePickupAnim.length+0.2f);
                 }
@@ -89,8 +90,8 @@ namespace Game
 
             }
 
-            if (swipeHint != null)
-                swipeHint.FadeOut();
+            if (hint != null)
+                hint.FadeOut();
 
             movement.Animancer.Play(finishPickupAnim);
             yield return new WaitForSeconds(finishPickupAnim.length);
@@ -106,7 +107,7 @@ namespace Game
         {
             if (activated) return false;
             activated = true;
-            StartCoroutine(CRun());
+            _coroutine= StartCoroutine(CRun());
             return true;
         }
 
@@ -115,6 +116,11 @@ namespace Game
             if (movement.Rope.IsMaxed && movement.transform.position.x < movement.Cart.transform.position.x)
             {
                 EndEvent?.Invoke();
+                StopCoroutine(_coroutine);
+                if (hint != null)
+                {
+                    hint.FadeOut(0.1f);
+                }
             }
         }
 
