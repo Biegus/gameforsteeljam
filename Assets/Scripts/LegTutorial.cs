@@ -15,6 +15,16 @@ namespace Game
         private void Awake()
         {
             movement.LegChanged += OnLegChanged;
+            movement.onInteractionEnd += () =>
+            {
+                Debug.Log("end");
+                Spawn();
+            };
+            movement.OnInteraction += () =>
+            {Debug.Log("start");
+               if(last!=null) 
+                last.FadeOut(0.2f);
+            };
             Spawn();
         }
 
@@ -29,11 +39,9 @@ namespace Game
         public void Spawn()
         {
            
-            if (last != null)
-            {
-                last.FadeOut();
-            }
-            if (index % 2 == 0)
+            if(last!=null)
+                last.FadeOut(0.2f);
+            if (movement.State%2==0 )
                last= Hint.Spawn(GetDescr(index,"Left"), points[index% points.Length].position);
             else
                last= Hint.Spawn(GetDescr(index,"Right"), points[index% points.Length].position);

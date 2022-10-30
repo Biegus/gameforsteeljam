@@ -60,12 +60,16 @@ namespace Settings
          private bool canWakeUp = false;
          [SerializeField] private TMP_Text toFadeAtStart;
          public bool HasPlank { get; private set; } = true;
+         public event Action OnInteraction;
+         public event Action onInteractionEnd;
+         
 
          private AudioSource[] audio;
          private void Awake()
         {
             Animancer = this.GetComponent<AnimancerComponent>();
             audio = GetComponents<AudioSource>();
+            
         }
 
         private void Start()
@@ -191,7 +195,10 @@ namespace Settings
             {
                 interactiveElement.EndEvent -= OnInteractiveElementExit;
                 interactiveElement.Abort();
+                onInteractionEnd?.Invoke();
             }
+
+            OnInteraction?.Invoke();
             this.interactiveElement = interactable;
             this.interactiveElement.EndEvent += OnInteractiveElementExit;
             this.transform.localScale =
@@ -210,6 +217,7 @@ namespace Settings
         private void OnInteractiveElementExit()
         {
             if (this.interactiveElement == null) return;
+            onInteractionEnd?.Invoke();
             this.interactiveElement.EndEvent -= OnInteractiveElementExit;
             this.interactiveElement = null;
         }
