@@ -112,6 +112,10 @@ namespace Game
 
         public void InteractiveUpdate(bool left, bool right, Vector2 pos)
         {
+            if (movement.Rope.IsMaxed && movement.transform.position.x < movement.Cart.transform.position.x)
+            {
+                EndEvent?.Invoke();
+            }
         }
 
         public void Abort()

@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField] private string sceneName;
         [SerializeField] private float destroyAfter = 0;
+        [SerializeField] private KeyCode[] codes;
 
         private void Start()
         {
@@ -18,10 +19,7 @@ namespace Game
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) | Input.GetKeyDown(KeyCode.Space) | Input.GetKeyDown(KeyCode.Return))
-            {
-                SceneManager.LoadScene("level0");
-            }
+            
         }
     }
 }
