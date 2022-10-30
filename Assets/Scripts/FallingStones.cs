@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -24,6 +25,12 @@ namespace Game
                 var el = Instantiate(stoneCollectionPrefab);
                 el.transform.position = spawnPoint.position;
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            var tak = this.GetComponent<BoxCollider2D>();
+            Gizmos.DrawWireCube(tak.offset+(Vector2)this.transform.position,tak.size);
         }
 
         public void Run()
