@@ -24,7 +24,6 @@ public class KillTrigger : MonoBehaviour
     [SerializeField] 
     private AudioClip sound;
 
-    [SerializeField] private bool soft;
 
     private bool Lock;
     private void OnTriggerEnter2D(Collider2D col)
@@ -39,23 +38,12 @@ public class KillTrigger : MonoBehaviour
                 audio.Play();
             }
             SpriteRenderer sprite = GameObject.FindWithTag("GameOver").GetComponent<SpriteRenderer>();
-            if (!soft)
-            {
+          
                 GameManager.Instance.Die(fadeDuration);
 
-            }
-            else FindObjectOfType<Movement>().GoToSleep();
-
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);
-            var tut=FindObjectOfType<LegTutorial>();
-            tut.Despawn(); 
             
-            DOVirtual.DelayedCall(3f, () =>
-            {
-                sprite.DOFade(0, 1).SetLink(this.gameObject);
 
-
-            }).SetLink(this.gameObject);
+        
         }
         
     }
