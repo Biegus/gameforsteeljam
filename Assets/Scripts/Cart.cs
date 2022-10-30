@@ -12,7 +12,7 @@ public class Cart : MonoBehaviour
     [SerializeField]
     private Vector2 MoveDirection = Vector2.right;
 
-    
+    [SerializeField] private float speedScalar=1; 
     [SerializeField] 
     private Rope Rope;
 
@@ -61,12 +61,12 @@ public class Cart : MonoBehaviour
         Vector2 Get(float x)
         {
             return new Vector2(x + startX,
-                speed.Evaluate(x) * (gizmosUp.position.y - gizmosDown.position.y) + gizmosDown.position.y);
+                speed.Evaluate(x/32) *speedScalar* (gizmosUp.position.y - gizmosDown.position.y) + gizmosDown.position.y);
         }
         for (int i = 0; i <= 100; i++)
         {
-            float x = startX + (gizmosEnd.position.x - startX) * i / ((float) 100);
-            float x2 = startX + (gizmosEnd.position.x - startX) * (i+1) / ((float) 100);
+            float x =   (gizmosEnd.position.x - startX) * i / ((float) 100);
+            float x2 =  (gizmosEnd.position.x - startX) * (i+1) / ((float) 100);
             Gizmos.DrawLine(Get(x), Get(x2));
         } 
     }
@@ -91,7 +91,7 @@ public class Cart : MonoBehaviour
             }
             
             particle.gameObject.SetActive(true);
-            transform.position += (Vector3)(MoveDirection * (speed.Evaluate((this.transform.position.x-startX)) * Time.deltaTime));
+            transform.position += (Vector3)(MoveDirection * (speed.Evaluate((this.transform.position.x-startX)/32) *speedScalar* Time.deltaTime));
         }
     }
 
