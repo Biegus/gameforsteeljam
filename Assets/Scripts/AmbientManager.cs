@@ -20,11 +20,13 @@ namespace Game
 
         private void OnDrawGizmos()
         {
-            Color[] colors = new Color[] {Color.red, Color.green, Color.blue};
+            Color[] colors = new Color[] {Color.red, Color.green, Color.blue,Color.grey};
             float real = Application.isPlaying ? startX : this.transform.position.x;
+            int i = 0;
             foreach (var curve in curves)
-            { 
-                Helper.DrawGraphOnScene(this.gameObject,startX,curve,up.position.y,down.position.y,right.position.x);
+            {
+                Gizmos.color = colors[(i++) % 4];
+                Helper.DrawGraphOnScene(this.gameObject,real,curve,up.position.y,down.position.y,right.position.x);
             }
         }
 

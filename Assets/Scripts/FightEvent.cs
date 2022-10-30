@@ -91,7 +91,7 @@ namespace Game
             
                 int hp = 2;
                 bool first = true;
-            for (int enemyHp=3;enemyHp>0;)
+            for (int enemyHp=2;enemyHp>0;)
             {
                 Hint spawn = null;
                 if (!first)
