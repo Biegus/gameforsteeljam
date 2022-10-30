@@ -60,7 +60,7 @@ namespace Settings
          private bool canWakeUp = false;
          [SerializeField] private TMP_Text toFadeAtStart;
          [SerializeField] private AudioSource startSource;
-         public bool HasPlank { get; set; } = true;
+         public bool HasPlank { get; set; } = false;
          public event Action OnInteraction;
          public event Action onInteractionEnd;
          public Rope Rope => rope;
