@@ -26,6 +26,7 @@ public class Rope : MonoBehaviour
 
     [SerializeField] private Transform floor;
     public bool IsMaxed { get; private set; }
+    
     private float ApplySag(float x, float distance)
     {
         float l = Length;
