@@ -14,18 +14,18 @@ namespace Game
         [FormerlySerializedAs("text")] [SerializeField] private TMP_Text textEnitity;
         private bool done = false;
         private Tween effectTween;
-        public static Hint Spawn(string text, Vector2 pos,float? despawnTime=null,Color? color=null,float? inTime=null)
+        public static Hint Spawn(string text, Vector2 pos,float? despawnTime=null,Color? color=null,float? inTime=null, bool disableEffect=false)
         {
             var instance = Instantiate(Prefab.Value);
             instance.transform.position = pos;
-            instance.Init(text,color?? Color.white,inTime??1);
+            instance.Init(text,color?? Color.white,inTime??1,disableEffect);
             if (despawnTime != null)
             {
                 DOVirtual.DelayedCall(despawnTime.Value + 1, () => instance.FadeOut()).SetLink(instance.gameObject);
             }
             return instance;
         }
-        private void Init(string text,Color color, float inTime)
+        private void Init(string text,Color color, float inTime,bool disableEffect)
         {
             this.textEnitity.text = text;
             this.textEnitity.color = color;
@@ -36,7 +36,7 @@ namespace Game
                 .SetLink(this.gameObject)
                 .OnComplete(() =>
                 {
-                  
+                    if (disableEffect) return; 
                     Vector2 basePos = this.transform.position;
                     StartCoroutine(Cor());     
                     IEnumerator Cor()
