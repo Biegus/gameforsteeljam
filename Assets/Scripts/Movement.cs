@@ -65,6 +65,8 @@ namespace Settings
          public event Action onInteractionEnd;
          public Rope Rope => rope;
          public Transform Cart => cargo;
+         public bool Sleep { get; set; }
+     [SerializeField] private LegTutorial tut;
 
          private AudioSource[] audio;
          private void Awake()
@@ -74,14 +76,28 @@ namespace Settings
             
         }
 
+         public void GoToSleep()
+         {
+             Debug.Log(sleep);
+             
+             if (sleep) return;
+             Animancer.enabled = true;
+             Animancer.Play(sleepClip);
+             sleep = true;
+             wakingUp = false;
+             DOVirtual.DelayedCall(1f, () =>
+             {
+                 canWakeUp = true;
+                 menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position,disableEffect:true);
+             });
+         }
+
         private void Start()
         {
+            
             Animancer.Play(sleepClip);
-            DOVirtual.DelayedCall(4f, () =>
-            {
-                canWakeUp = true;
-                menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position,disableEffect:true);
-            });
+            sleep = false;
+           GoToSleep();
             moveResetTimer = new Timer(2f);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
@@ -256,6 +272,7 @@ namespace Settings
                   
                     Animancer.Play(wakingUpClip).Events.OnEnd+= () =>
                     {
+                        tut.SpawnIfZero();
                         if(enableOnStart!=null) 
                     enableOnStart.gameObject.SetActive(true);
                         sleep = false;
