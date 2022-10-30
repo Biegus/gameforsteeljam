@@ -59,7 +59,8 @@ namespace Settings
          private bool autoSkip = false;
          private bool canWakeUp = false;
          [SerializeField] private TMP_Text toFadeAtStart;
-         public bool HasPlank { get; set; } = true;
+         [SerializeField] private AudioSource startSource;
+         public bool HasPlank { get; set; } = false;
          public event Action OnInteraction;
          public event Action onInteractionEnd;
          public Rope Rope => rope;
@@ -81,7 +82,6 @@ namespace Settings
                 canWakeUp = true;
                 menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position,disableEffect:true);
             });
-            sleep = false; 
             moveResetTimer = new Timer(2f);
             wrongCooldown = new Timer(0.2f);
             forgiveAfterStoper = new Timer(forgiveAfterTime);
@@ -248,6 +248,7 @@ namespace Settings
             {
                 if (Input.GetMouseButtonUp(0) &&canWakeUp)
                 {
+                    startSource.DOFade(0, 5f).SetEase(Ease.InOutQuad).SetLink(this.gameObject);
                     wakingUp = true;
                     menu.FadeOut();
                     
