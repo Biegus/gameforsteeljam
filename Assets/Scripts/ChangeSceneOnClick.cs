@@ -11,6 +11,7 @@ namespace Game
         [SerializeField] private float destroyAfter = 0;
         [SerializeField] private KeyCode[] codes;
 
+        [SerializeField] private bool leftright = false;
         private void Start()
         {
             if (destroyAfter > 0)
@@ -19,7 +20,19 @@ namespace Game
 
         private void Update()
         {
-            
+            foreach (KeyCode code in codes)
+            {
+                if (Input.GetKeyDown(code))
+                {
+                    SceneManager.LoadScene(sceneName);
+                }
+            }
+
+            if (leftright && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
+            {
+                
+                    SceneManager.LoadScene(sceneName);
+            }
         }
     }
 }
