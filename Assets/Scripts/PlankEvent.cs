@@ -21,7 +21,6 @@ namespace Game
         [SerializeField] private AnimationClip whilePickupAnim;
         [SerializeField] private AnimationClip finishPickupAnim;
         [SerializeField] private Camera cam;
-        [SerializeField] private GameObject activateAfter;
         private Hint hint;
         private IEnumerator CQuickEventTap(bool a)
         {
@@ -53,7 +52,6 @@ namespace Game
             }
             movement.Animancer.enabled = true;
             movement.Animancer.Play(idlePickupAnim);
-            activateAfter.gameObject.SetActive(true);
             this.GetComponent<SpriteRenderer>().enabled = false;
             hint.FadeOut();
             int counter = 0;
