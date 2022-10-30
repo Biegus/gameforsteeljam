@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 174139877960061785}
   - component: {fileID: 3419049001412909216}
-  - component: {fileID: 5682257602891261324}
   - component: {fileID: -8242587832146063559}
   - component: {fileID: 8735029187072903782}
   - component: {fileID: 1440462901134039606}
   - component: {fileID: 5443854550245170801}
+  - component: {fileID: 5682257602891261324}
   - component: {fileID: 3059181552853208605}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,24 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5682257602891261324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4105328122891095723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4be837d0ae23a840ac07a04d958d3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: level0
-  TriggeringTags:
-  - Player
-  fadeSprite: {fileID: 0}
-  fadeDuration: 0.1
-  sound: {fileID: 8300000, guid: a18d2326f3997bc4ab83a0c0f47f259a, type: 3}
 --- !u!50 &-8242587832146063559
 Rigidbody2D:
   serializedVersion: 4
@@ -277,6 +259,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5682257602891261324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105328122891095723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4be837d0ae23a840ac07a04d958d3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: level0
+  TriggeringTags:
+  - Player
+  fadeSprite: {fileID: 0}
+  fadeDuration: 0.1
+  sound: {fileID: 8300000, guid: a18d2326f3997bc4ab83a0c0f47f259a, type: 3}
 --- !u!114 &3059181552853208605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,3 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837a02c3c1605144fac3d93c70802847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layer: 6
+  BounceStrength: 5
+  RandomRotate: 180

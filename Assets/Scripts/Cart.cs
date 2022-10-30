@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Cart : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class Cart : MonoBehaviour
     public Vector2 Gravity=Vector2.down;
    public Rigidbody2D Rigidbody { get;private set; }
    private float gravLenght;
+
+   private float prevIntensity;
+   private Light2D light;
+       
     private void Awake()
     {
         particle.gameObject.SetActive(false);
@@ -30,6 +35,10 @@ public class Cart : MonoBehaviour
         Rigidbody = this.GetComponent<Rigidbody2D>();
         Rigidbody.gravityScale = 0;
         gravLenght = Physics2D.gravity.magnitude;
+
+        light = GetComponentInChildren<Light2D>();
+        prevIntensity = light.intensity;
+        light.intensity = 0;
     }
     
     void Update()
@@ -45,6 +54,9 @@ public class Cart : MonoBehaviour
                     audio[1].Play();
                     audio[1].DOFade(0.05f, 2f);
                 });
+
+                GetComponentInChildren<Light2D>().intensity = prevIntensity;
+                
                 once = false;
             }
             
