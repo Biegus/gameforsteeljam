@@ -61,7 +61,7 @@ public class Rope : MonoBehaviour
         }
         if (dist > Length || Mathf.Abs(EndA.position.y - EndB.position.y) > 0.5f)
         { 
-            Vector3[] points = { EndA.position, EndB.position };
+            Vector3[] points = { EndA.position, visualB.position };
             _lineRenderer.positionCount = 2;
             _lineRenderer.SetPositions(points);
         }
