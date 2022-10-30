@@ -358,6 +358,12 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 50d741dc00c82f64ab96ec091bf84027, type: 3}
   - {fileID: 8300000, guid: 9ac0b6243bdf1b144a16e01005dc8cfd, type: 3}
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &231628523
 Transform:
   m_ObjectHideFlags: 0
@@ -772,6 +778,10 @@ PrefabInstance:
       propertyPath: plankO
       value: 
       objectReference: {fileID: 2040660467}
+    - target: {fileID: 353073253167444477, guid: cdc12c5af4dec294d99c038b8f8c07c9, type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 960297509}
     - target: {fileID: 353073253167444477, guid: cdc12c5af4dec294d99c038b8f8c07c9, type: 3}
       propertyPath: activateAfter
       value: 

@@ -52,7 +52,7 @@ namespace Game
             }
             movement.Animancer.enabled = true;
             movement.Animancer.Play(idlePickupAnim);
-            this.GetComponent<SpriteRenderer>().enabled = false;
+            plankO.GetComponent<SpriteRenderer>().enabled = false;
             hint.FadeOut();
             int counter = 0;
             Hint swipeHint=null;
@@ -95,7 +95,7 @@ namespace Game
             movement.Animancer.Play(finishPickupAnim);
             yield return new WaitForSeconds(finishPickupAnim.length);
             movement.Animancer.enabled = false;
-            plankO.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
            // movement.enabled = true;
             EndEvent();
           

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Game;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
@@ -52,29 +53,16 @@ public class Cart : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (!gizmosDown || !gizmosUp) return;
-        
-        float startX = this.transform.position.x;
-        if (Application.isPlaying)
-            startX = this.startX;
-        float max = speed.keys.Max(item => item.value);
 
-        Vector2 Get(float x)
-        {
-            return new Vector2(x + startX,
-                speed.Evaluate(x/32) *speedScalar* (gizmosUp.position.y - gizmosDown.position.y) + gizmosDown.position.y);
-        }
-        for (int i = 0; i <= 100; i++)
-        {
-            float x =   (gizmosEnd.position.x - startX) * i / ((float) 100);
-            float x2 =  (gizmosEnd.position.x - startX) * (i+1) / ((float) 100);
-            Gizmos.DrawLine(Get(x), Get(x2));
-        } 
+        Gizmos.color = Color.blue;
+        float real = Application.isPlaying ? startX : this.transform.position.x;
+       this.gameObject.DrawGraphOnScene(real,speed,gizmosUp.position.y,gizmosDown.position.y,gizmosEnd.position.x);
+       
     }
 
     void Update()
     {
         awake |= Rope.IsMaxed;
-        Debug.Log(Rope.IsMaxed);
         if (awake)
         {
             if (once)
