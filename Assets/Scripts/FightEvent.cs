@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using Animancer;
+using DG.Tweening;
 using Settings;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Game
 {
@@ -18,6 +21,7 @@ namespace Game
         [SerializeField] private float speed;
         [SerializeField] private AnimationClip enemyDie;
         [SerializeField] private AnimationClip walking;
+        [SerializeField] private Camera camera;
         public Rigidbody2D Rigi { get; private set; }
         public AnimancerComponent AnimancerComponent { get; private set; }
         private bool isRunning;
@@ -55,13 +59,23 @@ namespace Game
 
         private IEnumerator CAttackByEnemy(int hp,Hint hint)
         {
+            camera.GetComponent<Volume>().profile.TryGet<Vignette>(out Vignette vin);
+            DOVirtual.Float(0, 0.5f, 0.3f, value =>
+            {
+                vin.intensity.value = value;
+            }).SetLoops(2, LoopType.Yoyo);
+            
             this.AnimancerComponent.Stop();
             yield return this.AnimancerComponent.Play(enemyAttackAnim);
             this.AnimancerComponent.Stop();
             if(hint!=null)
-            hint.FadeOut(0.05f);
-            if(hp==0)
-            GameManager.Instance.Die(0);
+                hint.FadeOut(0.05f);
+            if (hp == 0)
+            {
+                GameManager.Instance.Die(0);
+            }
+            
+
             yield return null;
 
         }
