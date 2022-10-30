@@ -209,6 +209,7 @@ namespace Settings
 
         private void OnInteractiveElementExit()
         {
+            if (this.interactiveElement == null) return;
             this.interactiveElement.EndEvent -= OnInteractiveElementExit;
             this.interactiveElement = null;
         }
