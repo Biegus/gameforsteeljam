@@ -320,7 +320,8 @@ namespace Settings
                         .Events.OnEnd+= () => { isFalling = false;
                         Animancer.Stop();
                     };
-                    isFalling = true;
+                    isFalling = true;                    
+                    audio[3].Play();
                 }
                 
         }
