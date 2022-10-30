@@ -3,6 +3,7 @@ using Animancer;
 using DG.Tweening;
 using Game;
 using Honey;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -57,6 +58,7 @@ namespace Settings
          private Timer autoSkipTimer;
          private bool autoSkip = false;
          private bool canWakeUp = false;
+         [SerializeField] private TMP_Text toFadeAtStart;
          public bool HasPlank { get; private set; } = true;
 
          private AudioSource[] audio;
@@ -72,7 +74,7 @@ namespace Settings
             DOVirtual.DelayedCall(4f, () =>
             {
                 canWakeUp = true;
-                menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position);
+                menu = Hint.Spawn("Press Left to wake up", menuTextPoint.transform.position,disableEffect:true);
             });
            
             moveResetTimer = new Timer(2f);
@@ -226,7 +228,10 @@ namespace Settings
         private void Update()
         {
 
-            if (interactiveElement!=null) return;
+            if (interactiveElement != null)
+            {
+                interactiveElement?.InteractiveUpdate(Input.GetMouseButton(0),Input.GetMouseButton(1),mousePos);
+            };
             if (sleep && !wakingUp)
             {
                 if (Input.GetMouseButtonUp(0) &&canWakeUp)
@@ -239,6 +244,8 @@ namespace Settings
                         if(enableOnStart!=null) 
                     enableOnStart.gameObject.SetActive(true);
                         sleep = false;
+                        toFadeAtStart.GetComponent<Animator>().enabled = false;
+                        toFadeAtStart.DOFade(0, 0.5f);
                         Animancer.Stop();
                         return;
                     };
@@ -288,8 +295,7 @@ namespace Settings
             mousePos=camera.ScreenToWorldPoint(Input.mousePosition);
             bool left = Input.GetMouseButton(0);
             bool right = Input.GetMouseButton(1);
-            if (interactiveElement == null)
-            {
+           
 
                 bool correct = true;
                 if (left && right) correct = false;
@@ -314,11 +320,6 @@ namespace Settings
                     isFalling = true;
                 }
                 
-            }
-            else
-            {
-                interactiveElement?.InteractiveUpdate(left,right,mousePos);
-            }
         }
     }
 }
