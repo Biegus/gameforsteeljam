@@ -13,7 +13,7 @@ namespace Game
         private void OnTriggerEnter2D(Collider2D col)
         {
             if(col.GetComponent<Movement>())
-            ev?.Invoke();
+                ev?.Invoke();
         }
     }
 }
