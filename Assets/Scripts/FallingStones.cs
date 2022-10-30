@@ -11,6 +11,7 @@ namespace Game
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private GameObject stoneCollectionPrefab;
         private bool started = false;
+        
         private IEnumerator CRun()
         {
             foreach (Transform spawnPoint in spawnPoints)
