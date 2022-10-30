@@ -74,6 +74,7 @@ public class Cart : MonoBehaviour
     void Update()
     {
         awake |= Rope.IsMaxed;
+        Debug.Log(Rope.IsMaxed);
         if (awake)
         {
             if (once)

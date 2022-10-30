@@ -53,6 +53,10 @@ public class Rope : MonoBehaviour
 
             EndB.position = dir * Length + (Vector2)EndA.position;
         }
+        else
+        {
+              IsMaxed = false;
+        }
         if (dist > Length || Mathf.Abs(EndA.position.y - EndB.position.y) > 0.5f)
         { 
             IsMaxed = true;
@@ -62,7 +66,7 @@ public class Rope : MonoBehaviour
         }
         else
         {
-            IsMaxed = false;
+          
             dist = Vector2.Distance(EndA.position, EndB.position);
             
             Vector3[] points = new Vector3[Link+1];
