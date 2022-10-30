@@ -240,6 +240,8 @@ namespace Settings
                 {
                     wakingUp = true;
                     menu.FadeOut();
+                    
+                    audio[2].Play();
                   
                     Animancer.Play(wakingUpClip).Events.OnEnd+= () =>
                     {
