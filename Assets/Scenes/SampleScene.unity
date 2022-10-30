@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 1577778833}
   - component: {fileID: 1577778832}
   - component: {fileID: 1577778831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: enemy_dyin0000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,3 +457,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6504258356007962637
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.484
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.327
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.34921193
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124735347962660258, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991554270543518361, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
+      propertyPath: m_Name
+      value: Goar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38b6bc541a1d1d447a725998783c7212, type: 3}
