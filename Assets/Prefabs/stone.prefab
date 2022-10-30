@@ -292,3 +292,4 @@ MonoBehaviour:
   layer: 6
   BounceStrength: 5
   RandomRotate: 180
+  BounceSound: {fileID: 8300000, guid: f34379a85e2a1c64eb58079d01023f05, type: 3}

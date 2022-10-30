@@ -14,15 +14,21 @@ public class BoulderBounce : MonoBehaviour
 
     [SerializeField] 
     private float BounceStrength = 2;
-    
-    [SerializeField] 
-    private float RandomRotate = 20;
+
+    [SerializeField] private float RandomRotate = 20;
+        
+    [SerializeField]
+    private AudioClip BounceSound;
     
     private bool bounced = false;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<Collider2D>() && !bounced) //not work
         {
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = BounceSound;
+            audio.Play();
+            
             bounced = true;
             var rbody = GetComponent<Rigidbody2D>();
             rbody.velocity = Vector2.up * BounceStrength;

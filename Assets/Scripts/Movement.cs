@@ -228,9 +228,11 @@ namespace Settings
         private void Update()
         {
 
+            mousePos=camera.ScreenToWorldPoint(Input.mousePosition);
             if (interactiveElement != null)
             {
-                interactiveElement?.InteractiveUpdate(Input.GetMouseButton(0),Input.GetMouseButton(1),mousePos);
+                interactiveElement.InteractiveUpdate(Input.GetMouseButton(0),Input.GetMouseButton(1),mousePos);
+                return;
             };
             if (sleep && !wakingUp)
             {
@@ -292,7 +294,6 @@ namespace Settings
                 Animancer.enabled = true;
 
             }
-            mousePos=camera.ScreenToWorldPoint(Input.mousePosition);
             bool left = Input.GetMouseButton(0);
             bool right = Input.GetMouseButton(1);
            

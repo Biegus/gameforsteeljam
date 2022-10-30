@@ -10,10 +10,18 @@ namespace Game
         [SerializeField] private float waitTime;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private GameObject stoneCollectionPrefab;
+        [SerializeField] private AudioClip RocksSound;
         private bool started = false;
         
         private IEnumerator CRun()
         {
+            AudioSource audio = GetComponent<AudioSource>();
+            if (audio && RocksSound)
+            {
+                audio.clip = RocksSound;
+                audio.PlayDelayed(1f);
+            }
+            
             foreach (Transform spawnPoint in spawnPoints)
             {
                 var particle=Instantiate(particlePrefab);
